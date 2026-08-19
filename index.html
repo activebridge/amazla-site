@@ -85,6 +85,25 @@
         animation: none;
         transform: rotate(-90deg);
       }
+      /* Fallback for cases where JS bails out when reduced motion is enabled. */
+      .hero-reveal-after,
+      [data-animate],
+      [data-animate-stagger-item] {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      /* Also handle elements that might directly get Tailwind animation classes. */
+      .opacity-0 {
+        opacity: 1 !important;
+      }
+      .translate-y-10,
+      .-translate-y-8,
+      .translate-x-10,
+      .-translate-x-10,
+      .scale-95 {
+        transform: none !important;
+      }
     }
     .compare-table th,
     .compare-table td {
@@ -116,9 +135,25 @@
       display: block;
     }
     .device-tab-active {
-      background: white;
-      color: #0f172a;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      /* Liquid glass active state (no unreadable white on mobile). */
+      background: rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+      backdrop-filter: blur(10px);
+    }
+    .device-tab:not(.device-tab-active):hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      backdrop-filter: blur(10px);
+    }
+    .device-tab:focus-visible {
+      outline: none;
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(10px);
     }
     .device-tabs {
       display: inline-flex;
@@ -160,9 +195,16 @@
       }
     }
     .hero-product-split {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    @media (min-width: 640px) {
+      .hero-product-split {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.75rem 1.5rem;
+      }
     }
     @media (max-width: 640px) {
       .download-grid {
@@ -212,37 +254,32 @@
             <span class="text-amazla-primary">from your wrist</span>
           </h1>
           <div class="hero-reveal-after">
-            <div class="hero-product-split mt-6 max-w-xl mx-auto lg:mx-0 text-left">
-              <div class="px-1 py-2">
-                <p class="text-base sm:text-lg font-semibold text-amazla-dark">Amazla</p>
-                <p class="mt-1 text-sm sm:text-base text-amazla-secondary">Full cloud control from anywhere</p>
+            <div class="hero-product-split mt-8 max-w-xl mx-auto lg:mx-0 text-left">
+              <div>
+                <a href="#amazla" class="inline-flex items-center justify-center font-semibold text-amazla-dark bg-white border-2 border-slate-200 hover:border-amazla-accent hover:text-amazla-accent rounded-xl px-8 py-4 transition-all duration-200 w-full sm:w-auto">
+                  Amazla — Free
+                </a>
+                <p class="mt-2 text-xs text-amazla-secondary px-1">Full cloud control from anywhere</p>
               </div>
-              <div class="px-1 py-2">
-                <p class="text-base sm:text-lg font-semibold text-amazla-dark">Amazla Key</p>
-                <p class="mt-1 text-sm sm:text-base text-amazla-secondary">Direct BLE key for near-car daily access</p>
+              <div>
+                <a href="#amazla-key" class="inline-flex items-center justify-center font-semibold text-white bg-amazla-primary hover:bg-red-600 rounded-xl px-8 py-4 transition-all duration-200 shadow-lg shadow-red-500/25 w-full sm:w-auto">
+                  Amazla Key
+                </a>
+                <p class="mt-2 text-xs text-amazla-secondary px-1">Direct BLE key for near-car daily access</p>
               </div>
-              <div class="px-1 py-2 sm:col-span-2 lg:col-span-1">
-                <p class="text-base sm:text-lg font-semibold text-amazla-dark">Garmin Key</p>
-                <p class="mt-1 text-sm sm:text-base text-amazla-secondary">BLE key for Garmin watches</p>
+              <div>
+                <a href="https://apps.garmin.com/apps/4571dbca-7c1e-4d04-9636-82ddb54283a6" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center font-semibold text-white bg-amazla-accent hover:bg-sky-600 rounded-xl px-8 py-4 transition-all duration-200 shadow-lg shadow-sky-500/20 w-full sm:w-auto">
+                  Tesla Key
+                </a>
+                <p class="mt-2 text-xs text-amazla-secondary px-1">BLE key for Garmin watches</p>
+              </div>
+              <div>
+                <a href="#compare" class="inline-flex items-center justify-center font-semibold text-slate-700 bg-white border-2 border-slate-300 hover:border-amazla-accent/50 hover:text-amazla-accent hover:bg-amazla-accent/10 rounded-xl px-8 py-4 transition-all duration-200 shadow-sm hover:shadow-lg hover:shadow-amazla-accent/10 w-full sm:w-auto">
+                  Compare apps
+                </a>
+                <p class="mt-2 text-xs text-amazla-secondary px-1">See how the apps differ</p>
               </div>
             </div>
-            <div class="mt-10 flex flex-col sm:flex-row flex-wrap gap-4 justify-center lg:justify-start">
-              <a href="#amazla" class="inline-flex items-center justify-center font-semibold text-amazla-dark bg-white border-2 border-slate-200 hover:border-amazla-accent hover:text-amazla-accent rounded-xl px-8 py-4 transition-all duration-200">
-                Amazla — Free
-              </a>
-              <a href="#amazla-key" class="inline-flex items-center justify-center font-semibold text-white bg-amazla-primary hover:bg-red-600 rounded-xl px-8 py-4 transition-all duration-200 shadow-lg shadow-red-500/25">
-                Amazla Key
-              </a>
-              <a href="https://apps.garmin.com/apps/4571dbca-7c1e-4d04-9636-82ddb54283a6" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center font-semibold text-white bg-amazla-accent hover:bg-sky-600 rounded-xl px-8 py-4 transition-all duration-200 shadow-lg shadow-sky-500/20">
-                Garmin Key
-              </a>
-              <a href="#compare" class="inline-flex items-center justify-center font-semibold text-slate-700 bg-white border-2 border-slate-300 hover:border-amazla-accent/50 hover:text-amazla-accent hover:bg-amazla-accent/10 rounded-xl px-8 py-4 transition-all duration-200 shadow-sm hover:shadow-lg hover:shadow-amazla-accent/10">
-                Compare apps
-              </a>
-            </div>
-            <p class="mt-4 text-sm text-amazla-secondary max-w-xl mx-auto lg:mx-0">
-              Install Zepp on your phone first, then find the app inside Zepp.
-            </p>
           </div>
         </div>
         <div class="relative flex-1 min-w-0 lg:flex-[1] order-first lg:order-none flex flex-row items-end justify-center gap-1 min-h-0 -mt-12 lg:mt-0 lg:flex-col lg:items-end lg:justify-start w-full gap-6 lg:gap-8" data-animate="right">
@@ -267,7 +304,7 @@
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12" data-animate>
           <h2 class="text-3xl sm:text-4xl font-bold text-amazla-dark">Compare apps</h2>
-          <p class="mt-4 text-lg text-amazla-secondary">Amazla and Amazla Key are available now. Garmin Key is available.</p>
+          <p class="mt-4 text-lg text-amazla-secondary">Amazla and Amazla Key are available now. Tesla Key is available.</p>
         </div>
         <div class="overflow-x-auto rounded-2xl border border-slate-200 shadow-lg" data-animate>
           <table class="compare-table w-full min-w-[52rem]">
@@ -276,7 +313,7 @@
                 <th class="w-1/4"></th>
                 <th class="w-1/4">Amazla <span class="text-amazla-accent font-normal text-sm">(Free)</span></th>
                 <th class="w-1/4">Amazla Key <span class="text-amazla-primary font-normal text-sm">($10)</span></th>
-                <th class="w-1/4">Garmin Key</th>
+                <th class="w-1/4">Tesla Key</th>
               </tr>
             </thead>
             <tbody>
@@ -304,12 +341,13 @@
       <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-8" data-animate>
           <h2 class="text-3xl sm:text-4xl font-bold text-amazla-dark">Products</h2>
-          <p class="mt-4 text-lg text-amazla-secondary">Two apps — pick cloud control or a BLE key.</p>
+          <p class="mt-4 text-lg text-amazla-secondary">Three apps — pick cloud control, Amazla Key, or Tesla Key for Garmin watches.</p>
         </div>
         <div class="product-tabs-wrap flex justify-center" role="tablist" aria-label="Product details">
           <div class="product-tabs">
             <button type="button" id="product-tab-amazla" class="product-tab product-tab-active rounded-full text-sm font-semibold transition-colors" role="tab" aria-selected="true" aria-controls="amazla">Amazla</button>
             <button type="button" id="product-tab-key" class="product-tab rounded-full text-sm font-semibold text-slate-500 hover:text-amazla-dark transition-colors" role="tab" aria-selected="false" aria-controls="amazla-key">Amazla Key</button>
+            <button type="button" id="product-tab-tesla" class="product-tab rounded-full text-sm font-semibold text-slate-500 hover:text-amazla-dark transition-colors" role="tab" aria-selected="false" aria-controls="tesla-key">Tesla Key</button>
           </div>
         </div>
 
@@ -375,6 +413,39 @@
             <article class="bg-amazla-background rounded-2xl p-6" data-animate-stagger-item>
               <h3 class="font-semibold text-amazla-dark">$10 one-time</h3>
               <p class="mt-2 text-amazla-secondary text-sm">Pay once in Zepp. No subscription.</p>
+            </article>
+          </div>
+        </div>
+
+        <div id="tesla-key" class="product-panel" role="tabpanel" hidden data-animate>
+          <div class="max-w-3xl mx-auto text-center sm:text-left">
+            <span class="inline-flex items-center rounded-full bg-amazla-accent/10 text-amazla-accent px-4 py-2 text-sm font-semibold tracking-wide uppercase">€11.49 one-time · BLE</span>
+            <h3 class="mt-6 text-2xl sm:text-3xl font-bold text-amazla-dark">Tesla Key</h3>
+            <p class="mt-4 text-lg text-amazla-secondary">
+              A Tesla key on your wrist. Lock, unlock, frunk, and trunk over Bluetooth (VCSEC) on Garmin watches — no internet needed for daily use.
+            </p>
+            <ul class="mt-6 space-y-2 text-amazla-secondary text-sm inline-block text-left">
+              <li class="flex items-start gap-2"><span class="w-2 h-2 rounded-full bg-amazla-accent mt-1.5 flex-shrink-0"></span> BLE range ~10–15 m, no phone relay for commands</li>
+              <li class="flex items-start gap-2"><span class="w-2 h-2 rounded-full bg-slate-400 mt-1.5 flex-shrink-0"></span> One-time pairing and Tesla sign-in at setup</li>
+              <li class="flex items-start gap-2"><span class="w-2 h-2 rounded-full bg-slate-400 mt-1.5 flex-shrink-0"></span> Garmin Connect IQ watches only</li>
+            </ul>
+          </div>
+          <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6" data-animate-stagger>
+            <article class="bg-amazla-background rounded-2xl p-6" data-animate-stagger-item>
+              <h3 class="font-semibold text-amazla-dark">Lock &amp; Unlock</h3>
+              <p class="mt-2 text-amazla-secondary text-sm">Direct BLE commands on your Garmin watch — no internet required.</p>
+            </article>
+            <article class="bg-amazla-background rounded-2xl p-6" data-animate-stagger-item>
+              <h3 class="font-semibold text-amazla-dark">Frunk &amp; Trunk</h3>
+              <p class="mt-2 text-amazla-secondary text-sm">Open frunk or trunk over Bluetooth nearby.</p>
+            </article>
+            <article class="bg-amazla-background rounded-2xl p-6" data-animate-stagger-item>
+              <h3 class="font-semibold text-amazla-dark">BLE Pairing</h3>
+              <p class="mt-2 text-amazla-secondary text-sm">Pair once, keys stored on your Garmin watch.</p>
+            </article>
+            <article class="bg-amazla-background rounded-2xl p-6" data-animate-stagger-item>
+              <h3 class="font-semibold text-amazla-dark">€11.49 one-time</h3>
+              <p class="mt-2 text-amazla-secondary text-sm">Pay once in Garmin Connect IQ. No subscription.</p>
             </article>
           </div>
         </div>
@@ -450,20 +521,20 @@
         <div class="absolute top-1/2 left-0 w-96 h-96 bg-amazla-primary/10 rounded-full blur-3xl -translate-x-1/2" data-parallax="0.06"></div>
       </div>
       <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-8" data-animate>
+        <div class="text-center mb-10" data-animate>
           <h2 class="text-3xl sm:text-4xl font-bold">Supported watches</h2>
           <p class="mt-4 text-lg text-slate-300">Each app targets a different platform.</p>
         </div>
-        <div class="flex justify-center mb-10" role="tablist" aria-label="Device lists by app">
+        <div class="flex justify-center mb-14" role="tablist" aria-label="Device lists by app">
           <div class="device-tabs">
             <button type="button" id="device-tab-amazla" class="device-tab device-tab-active rounded-full text-sm font-semibold transition-colors" role="tab" aria-selected="true" aria-controls="device-panel-amazla">Amazla (ZeppOS 1.x)</button>
             <button type="button" id="device-tab-key" class="device-tab rounded-full text-sm font-semibold text-slate-300 hover:text-white transition-colors" role="tab" aria-selected="false" aria-controls="device-panel-key">Amazla Key (ZeppOS 3+)</button>
-            <button type="button" id="device-tab-garmin" class="device-tab rounded-full text-sm font-semibold text-slate-300 hover:text-white transition-colors" role="tab" aria-selected="false" aria-controls="device-panel-garmin">Garmin Key</button>
+            <button type="button" id="device-tab-garmin" class="device-tab rounded-full text-sm font-semibold text-slate-300 hover:text-white transition-colors" role="tab" aria-selected="false" aria-controls="device-panel-garmin">Tesla Key (Garmin)</button>
           </div>
         </div>
 
         <div id="device-panel-amazla" class="device-panel relative" role="tabpanel" data-animate>
-          <p class="text-center text-sm text-slate-400 mb-6">GTR 3, GTS 3, GTR 4, GTS 4, T-Rex 2, Bip 5, Balance, and more — 23+ models.</p>
+          <p class="text-center text-sm text-slate-400 mt-4 mb-8">GTR 3, GTS 3, GTR 4, GTS 4, T-Rex 2, Bip 5, Balance, and more — 23+ models.</p>
           <div id="devices-carousel" class="devices-carousel overflow-x-auto" role="region" aria-label="Amazla supported devices">
             <div class="flex items-stretch gap-4 sm:gap-5 w-max px-16 sm:px-20 pb-1">
               <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/gts-3.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">GTS 3</p></article>
@@ -491,7 +562,7 @@
         </div>
 
         <div id="device-panel-key" class="device-panel relative" role="tabpanel" hidden data-animate>
-          <p class="text-center text-sm text-slate-400 mb-6">Active 2, Balance 2, T-Rex 3, Bip 6, and all ZeppOS 3.0+ round, square, and band watches.</p>
+          <p class="text-center text-sm text-slate-400 mt-4 mb-8">Active 2, Balance 2, T-Rex 3, Bip 6, and all ZeppOS 3.0+ round, square, and band watches.</p>
           <div id="devices-carousel-key" class="devices-carousel overflow-x-auto" role="region" aria-label="Amazla Key supported devices">
             <div class="flex items-stretch gap-4 sm:gap-5 w-max px-16 sm:px-20 pb-1">
               <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/active-2.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Active 2</p></article>
@@ -510,8 +581,8 @@
         </div>
 
         <div id="device-panel-garmin" class="device-panel relative" role="tabpanel" hidden data-animate>
-          <p class="text-center text-sm text-slate-400 mb-6">fēnix, epix, Forerunner, Instinct, tactix, MARQ, Venu, Approach and more — 55+ models.</p>
-          <div id="devices-carousel-garmin" class="devices-carousel overflow-x-auto" role="region" aria-label="Garmin Key supported devices">
+          <p class="text-center text-sm text-slate-400 mt-4 mb-8">fēnix, epix, Forerunner, Instinct, tactix, MARQ, Venu, Approach and more — 55+ models.</p>
+          <div id="devices-carousel-garmin" class="devices-carousel overflow-x-auto" role="region" aria-label="Tesla Key supported devices">
             <div class="flex items-stretch gap-4 sm:gap-5 w-max px-16 sm:px-20 pb-1">
               <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/fenix-7s.png?v=2" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">fēnix 7</p></article>
               <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/fenix-8-pro.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">fēnix 8</p></article>
@@ -569,7 +640,7 @@
           <article class="rounded-3xl bg-white border-2 border-slate-300 shadow-lg p-8 text-center sm:col-span-2 lg:col-span-1" data-animate-stagger-item>
             <span class="inline-flex items-center rounded-full bg-slate-100 text-slate-700 px-4 py-1.5 text-sm font-semibold">€11.49 one-time</span>
             <p class="mt-2 text-xs text-amazla-secondary">No subscription</p>
-            <h3 class="mt-4 text-2xl font-bold text-amazla-dark">Garmin Key</h3>
+            <h3 class="mt-4 text-2xl font-bold text-amazla-dark">Tesla Key</h3>
             <p class="mt-2 text-amazla-secondary text-sm">BLE Tesla key for Garmin watches. Lock, unlock, frunk and trunk — no phone needed daily.</p>
             <div class="mt-6 flex flex-row flex-wrap gap-3 justify-center">
               <a href="https://apps.garmin.com/apps/4571dbca-7c1e-4d04-9636-82ddb54283a6" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center font-semibold text-base sm:text-lg text-white bg-amazla-dark hover:bg-slate-700 rounded-xl px-8 py-4 transition-all shadow-lg">Install on Garmin</a>
@@ -591,7 +662,7 @@
       </div>
     </div>
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-8 border-t border-white/10 text-center text-sm text-slate-500">
-      © Amazla. Amazla is free; Amazla Key is a $10 one-time purchase inside Zepp. Not affiliated with Tesla or Amazfit.
+      © Amazla. Amazla is free; Amazla Key is a $10 one-time purchase inside Zepp; Tesla Key is a €11.49 one-time purchase inside Garmin Connect IQ. Not affiliated with Tesla, Zepp, or Garmin.
     </div>
   </footer>
 
@@ -623,23 +694,36 @@
 
       var productTabAmazla = document.getElementById('product-tab-amazla');
       var productTabKey = document.getElementById('product-tab-key');
+      var productTabTesla = document.getElementById('product-tab-tesla');
       var productPanelAmazla = document.getElementById('amazla');
       var productPanelKey = document.getElementById('amazla-key');
+      var productPanelTesla = document.getElementById('tesla-key');
 
       function showProductPanel(which) {
         var isAmazla = which === 'amazla';
+        var isKey = which === 'key';
+        var isTesla = which === 'tesla';
+
         productPanelAmazla.hidden = !isAmazla;
-        productPanelKey.hidden = isAmazla;
+        productPanelKey.hidden = !isKey;
+        productPanelTesla.hidden = !isTesla;
+
         productTabAmazla.classList.toggle('product-tab-active', isAmazla);
-        productTabKey.classList.toggle('product-tab-active', !isAmazla);
+        productTabKey.classList.toggle('product-tab-active', isKey);
+        productTabTesla.classList.toggle('product-tab-active', isTesla);
+
         productTabAmazla.setAttribute('aria-selected', isAmazla ? 'true' : 'false');
-        productTabKey.setAttribute('aria-selected', !isAmazla ? 'true' : 'false');
+        productTabKey.setAttribute('aria-selected', isKey ? 'true' : 'false');
+        productTabTesla.setAttribute('aria-selected', isTesla ? 'true' : 'false');
+
         productTabAmazla.classList.toggle('text-slate-500', !isAmazla);
-        productTabKey.classList.toggle('text-slate-500', isAmazla);
+        productTabKey.classList.toggle('text-slate-500', !isKey);
+        productTabTesla.classList.toggle('text-slate-500', !isTesla);
       }
 
       productTabAmazla.addEventListener('click', function () { showProductPanel('amazla'); });
       productTabKey.addEventListener('click', function () { showProductPanel('key'); });
+      productTabTesla.addEventListener('click', function () { showProductPanel('tesla'); });
 
       function syncProductFromHash() {
         var hash = (location.hash || '').toLowerCase();
@@ -648,6 +732,9 @@
           document.getElementById('products').scrollIntoView();
         } else if (hash === '#amazla') {
           showProductPanel('amazla');
+          document.getElementById('products').scrollIntoView();
+        } else if (hash === '#tesla-key') {
+          showProductPanel('tesla');
           document.getElementById('products').scrollIntoView();
         } else if (hash === '#products') {
           showProductPanel('amazla');

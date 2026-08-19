@@ -64,6 +64,29 @@
     #hero-logo-key .logo-key-rotate {
       transform-box: view-box;
       transform-origin: 201.3px 173.7px;
+      transform: rotate(0);
+      will-change: transform;
+    }
+    #hero-logo-key .logo-key-slide {
+      will-change: transform;
+    }
+    .hero-logo-animate #hero-logo-key .logo-key-rotate {
+      animation: logo-key-rotate 2.5s 0.4s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+    }
+    @keyframes logo-key-rotate {
+      0%   { transform: rotate(0); }
+      28%  { transform: rotate(85deg); }
+      34%  { transform: rotate(93deg); }
+      38%  { transform: rotate(90deg); }
+      to   { transform: rotate(90deg); }
+    }
+    .hero-logo-animate #hero-logo-key .logo-key-slide {
+      animation: logo-key-slide 2.5s 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    @keyframes logo-key-slide {
+      0%  { transform: translate(0); }
+      40% { transform: translate(0); }
+      to  { transform: translate(-250px); }
     }
     #hero-logo-key .logo-key-counter {
       transform-box: view-box;
@@ -79,31 +102,6 @@
       34% { transform: rotate(-93deg); }
       38% { transform: rotate(-90deg); }
       to { transform: rotate(-90deg); }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .hero-logo-animate #hero-logo-key .logo-key-counter {
-        animation: none;
-        transform: rotate(-90deg);
-      }
-      /* Fallback for cases where JS bails out when reduced motion is enabled. */
-      .hero-reveal-after,
-      [data-animate],
-      [data-animate-stagger-item] {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
-      }
-      /* Also handle elements that might directly get Tailwind animation classes. */
-      .opacity-0 {
-        opacity: 1 !important;
-      }
-      .translate-y-10,
-      .-translate-y-8,
-      .translate-x-10,
-      .-translate-x-10,
-      .scale-95 {
-        transform: none !important;
-      }
     }
     .compare-table th,
     .compare-table td {
@@ -215,9 +213,16 @@
     .product-panel[hidden] {
       display: none;
     }
-    footer {
-      scroll-snap-align: end;
-      scroll-snap-stop: always;
+    /* Section scroll snap — mobile only to avoid jarring desktop experience. */
+    @media (max-width: 1023px) {
+      html {
+        scroll-snap-type: y mandatory;
+      }
+      main > section,
+      footer {
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+      }
     }
   </style>
 </head>
@@ -240,7 +245,7 @@
 
   <main>
     <!-- Hero -->
-    <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+    <section id="hero" class="hero-logo-animate relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
       <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-amazla-primary/5 rounded-full blur-3xl" data-parallax="0.08"></div>
         <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-amazla-accent/5 rounded-full blur-3xl" data-parallax="0.12"></div>
@@ -798,6 +803,7 @@
       initCarousel('devices-carousel', 'devices-prev-btn', 'devices-next-btn');
       initCarousel('devices-carousel-key', 'devices-prev-btn-key', 'devices-next-btn-key');
       initCarousel('devices-carousel-garmin', 'devices-prev-btn-garmin', 'devices-next-btn-garmin');
+
     })();
   </script>
 </body>

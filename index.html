@@ -121,11 +121,11 @@
     .compare-table tr:last-child td {
       border-bottom: none;
     }
-    #device-panel-garmin .devices-card-image {
+    [id^="device-panel-garmin"] .devices-card-image {
       /* Keep Garmin cards static: no transform-based clipping */
       transform: none !important;
     }
-    #device-panel-garmin .devices-card-image img {
+    [id^="device-panel-garmin"] .devices-card-image img {
       width: 100%;
       height: 100%;
       object-fit: contain;
@@ -162,6 +162,13 @@
     }
     .device-tab {
       padding: 0.625rem 1.5rem;
+    }
+    @media (max-width: 767px) {
+      .device-tabs {
+        flex-wrap: wrap;
+        justify-content: center;
+        border-radius: 1.5rem;
+      }
     }
     .product-tabs {
       display: inline-flex;
@@ -264,7 +271,7 @@
                 <a href="#amazla" class="inline-flex items-center justify-center font-semibold text-amazla-dark bg-white border-2 border-slate-200 hover:border-amazla-accent hover:text-amazla-accent rounded-xl px-8 py-4 transition-all duration-200 w-full sm:w-auto">
                   Amazla — Free
                 </a>
-                <p class="mt-2 text-xs text-amazla-secondary px-1">Full cloud control from anywhere</p>
+                <p class="mt-2 text-xs text-amazla-secondary px-1">Cloud control · Amazfit &amp; Garmin</p>
               </div>
               <div>
                 <a href="#amazla-key" class="inline-flex items-center justify-center font-semibold text-white bg-amazla-primary hover:bg-red-600 rounded-xl px-8 py-4 transition-all duration-200 shadow-lg shadow-red-500/25 w-full sm:w-auto">
@@ -309,7 +316,7 @@
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12" data-animate>
           <h2 class="text-3xl sm:text-4xl font-bold text-amazla-dark">Compare apps</h2>
-          <p class="mt-4 text-lg text-amazla-secondary">Amazla and Amazla Key are available now. Tesla Key is available.</p>
+          <p class="mt-4 text-lg text-amazla-secondary">Amazla runs on Amazfit and Garmin. Amazla Key (Amazfit) and Tesla Key (Garmin) add direct BLE access.</p>
         </div>
         <div class="overflow-x-auto rounded-2xl border border-slate-200 shadow-lg" data-animate>
           <table class="compare-table w-full min-w-[52rem]">
@@ -329,7 +336,7 @@
               <tr><td class="font-medium text-amazla-dark">Climate &amp; Defrost</td><td>Yes</td><td>No</td><td>No</td></tr>
               <tr><td class="font-medium text-amazla-dark">Charge Port</td><td>Yes</td><td>No</td><td>Planned</td></tr>
               <tr><td class="font-medium text-amazla-dark">Vehicle Status</td><td>Live</td><td>No</td><td>Live — doors &amp; lock</td></tr>
-              <tr><td class="font-medium text-amazla-dark">Watch Platform</td><td>Amazfit, ZeppOS 1.x</td><td>Amazfit, ZeppOS 3.0+</td><td>Garmin</td></tr>
+              <tr><td class="font-medium text-amazla-dark">Watch Platform</td><td>Amazfit (ZeppOS 1.x) &amp; Garmin</td><td>Amazfit, ZeppOS 3.0+</td><td>Garmin</td></tr>
               <tr><td class="font-medium text-amazla-dark">Price</td><td>Free</td><td>$10 one-time</td><td>€11.49 one-time</td></tr>
             </tbody>
           </table>
@@ -346,7 +353,7 @@
       <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-8" data-animate>
           <h2 class="text-3xl sm:text-4xl font-bold text-amazla-dark">Products</h2>
-          <p class="mt-4 text-lg text-amazla-secondary">Three apps — pick cloud control, Amazla Key, or Tesla Key for Garmin watches.</p>
+          <p class="mt-4 text-lg text-amazla-secondary">Pick free cloud control on Amazfit or Garmin, or a BLE key — Amazla Key for Amazfit, Tesla Key for Garmin.</p>
         </div>
         <div class="product-tabs-wrap flex justify-center" role="tablist" aria-label="Product details">
           <div class="product-tabs">
@@ -366,8 +373,12 @@
             <ul class="mt-6 space-y-2 text-amazla-secondary text-sm inline-block text-left">
               <li class="flex items-start gap-2"><span class="w-2 h-2 rounded-full bg-amazla-accent mt-1.5 flex-shrink-0"></span> Remote access from anywhere with cell service</li>
               <li class="flex items-start gap-2"><span class="w-2 h-2 rounded-full bg-slate-400 mt-1.5 flex-shrink-0"></span> Phone with internet required for every command</li>
-              <li class="flex items-start gap-2"><span class="w-2 h-2 rounded-full bg-slate-400 mt-1.5 flex-shrink-0"></span> ZeppOS 1.x — 23+ older Amazfit models</li>
+              <li class="flex items-start gap-2"><span class="w-2 h-2 rounded-full bg-slate-400 mt-1.5 flex-shrink-0"></span> Amazfit: ZeppOS 1.x — 23+ older models</li>
+              <li class="flex items-start gap-2"><span class="w-2 h-2 rounded-full bg-amazla-accent mt-1.5 flex-shrink-0"></span> Garmin: now on Connect IQ — free, same cloud control</li>
             </ul>
+            <div class="mt-6">
+              <a href="https://apps.garmin.com/apps/0b68560b-0407-45db-9edc-1cc1246215da" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center font-semibold text-amazla-dark bg-white border-2 border-slate-200 hover:border-amazla-accent hover:text-amazla-accent rounded-xl px-8 py-4 transition-all duration-200">Get Amazla for Garmin</a>
+            </div>
           </div>
           <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6" data-animate-stagger>
             <article class="bg-amazla-background rounded-2xl p-6" data-animate-stagger-item>
@@ -534,6 +545,7 @@
           <div class="device-tabs">
             <button type="button" id="device-tab-amazla" class="device-tab device-tab-active rounded-full text-sm font-semibold transition-colors" role="tab" aria-selected="true" aria-controls="device-panel-amazla">Amazla (ZeppOS 1.x)</button>
             <button type="button" id="device-tab-key" class="device-tab rounded-full text-sm font-semibold text-slate-300 hover:text-white transition-colors" role="tab" aria-selected="false" aria-controls="device-panel-key">Amazla Key (ZeppOS 3+)</button>
+            <button type="button" id="device-tab-garmin-amazla" class="device-tab rounded-full text-sm font-semibold text-slate-300 hover:text-white transition-colors" role="tab" aria-selected="false" aria-controls="device-panel-garmin-amazla">Amazla (Garmin)</button>
             <button type="button" id="device-tab-garmin" class="device-tab rounded-full text-sm font-semibold text-slate-300 hover:text-white transition-colors" role="tab" aria-selected="false" aria-controls="device-panel-garmin">Tesla Key (Garmin)</button>
           </div>
         </div>
@@ -583,6 +595,30 @@
           </div>
           <button type="button" id="devices-prev-btn-key" class="devices-nav absolute -left-3 sm:-left-4 top-1/2 -translate-y-1/2 rounded-full bg-white/15 px-3 py-2 text-white hover:bg-white/25 transition-colors border-0" aria-label="Previous devices">←</button>
           <button type="button" id="devices-next-btn-key" class="devices-nav absolute -right-3 sm:-right-4 top-1/2 -translate-y-1/2 rounded-full bg-white/15 px-3 py-2 text-white hover:bg-white/25 transition-colors border-0" aria-label="Next devices">→</button>
+        </div>
+
+        <div id="device-panel-garmin-amazla" class="device-panel relative" role="tabpanel" hidden data-animate>
+          <p class="text-center text-sm text-slate-400 mt-4 mb-8">fēnix, epix, Enduro 2, Forerunner, Instinct, tactix, MARQ, Descent Mk3, Venu, vívoactive, D2 — 40+ models.</p>
+          <div id="devices-carousel-garmin-amazla" class="devices-carousel overflow-x-auto" role="region" aria-label="Amazla for Garmin supported devices">
+            <div class="flex items-stretch gap-4 sm:gap-5 w-max px-16 sm:px-20 pb-1">
+              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/fenix-7s.png?v=2" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">fēnix 7</p></article>
+              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/fenix-8-pro.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">fēnix 8</p></article>
+              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/epix-pro-47.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">epix / epix Pro</p></article>
+              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/tactix-8.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">tactix 7 / 8</p></article>
+              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/marq-gen2.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">MARQ Gen 2</p></article>
+              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/forerunner-970.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Forerunner 970</p></article>
+              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/forerunner-965.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Forerunner 965</p></article>
+              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/forerunner-265.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Forerunner 265 / 570</p></article>
+              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/instinct-3-amoled.png?v=2" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Instinct 3</p></article>
+              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/descent-mk3.png?v=2" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Descent Mk3</p></article>
+              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/venu-4-45.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Venu 4</p></article>
+              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/venu-x1.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Venu X1</p></article>
+              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/venu-sq2.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Venu Sq. 2</p></article>
+              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/vivoactive-6.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">vívoactive 6</p></article>
+            </div>
+          </div>
+          <button type="button" id="devices-prev-btn-garmin-amazla" class="devices-nav absolute -left-3 sm:-left-4 top-1/2 -translate-y-1/2 rounded-full bg-white/15 px-3 py-2 text-white hover:bg-white/25 transition-colors border-0" aria-label="Previous devices">←</button>
+          <button type="button" id="devices-next-btn-garmin-amazla" class="devices-nav absolute -right-3 sm:-right-4 top-1/2 -translate-y-1/2 rounded-full bg-white/15 px-3 py-2 text-white hover:bg-white/25 transition-colors border-0" aria-label="Next devices">→</button>
         </div>
 
         <div id="device-panel-garmin" class="device-panel relative" role="tabpanel" hidden data-animate>
@@ -636,6 +672,11 @@
               <a href="https://play.google.com/store/apps/details?id=com.huami.watch.hmwatchmanager&hl=uk" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center font-semibold text-base sm:text-lg text-amazla-dark bg-white border-2 border-slate-200 hover:border-amazla-accent rounded-xl px-8 py-4 transition-all">Install Zepp (Android)</a>
             </div>
             <p class="mt-4 text-sm text-amazla-secondary">Install Zepp on your phone first, then find the app inside Zepp.</p>
+            <div class="mt-6" style="border-top:1px solid #e2e8f0;padding-top:1.5rem">
+              <p class="text-sm font-semibold text-amazla-dark">On a Garmin watch?</p>
+              <a href="https://apps.garmin.com/apps/0b68560b-0407-45db-9edc-1cc1246215da" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center justify-center font-semibold text-base sm:text-lg text-white bg-amazla-dark hover:bg-slate-700 rounded-xl px-8 py-4 transition-all shadow-lg">Install on Garmin</a>
+              <p class="mt-3 text-sm text-amazla-secondary">Find it in the Garmin Connect IQ Store.</p>
+            </div>
           </article>
           <article class="rounded-3xl bg-white border-2 border-amazla-primary/20 shadow-lg p-8 text-center" data-animate-stagger-item>
             <span class="inline-flex items-center rounded-full bg-amazla-primary/10 text-amazla-primary px-4 py-1.5 text-sm font-semibold">$10 one-time</span>
@@ -673,7 +714,7 @@
       </div>
     </div>
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-8 border-t border-white/10 text-center text-sm text-slate-500">
-      © Amazla. Amazla is free; Amazla Key is a $10 one-time purchase inside Zepp; Tesla Key is a €11.49 one-time purchase inside Garmin Connect IQ. Not affiliated with Tesla, Zepp, or Garmin.
+      © Amazla. Amazla is free on Amazfit and Garmin; Amazla Key is a $10 one-time purchase inside Zepp; Tesla Key is a €11.49 one-time purchase inside Garmin Connect IQ. Not affiliated with Tesla, Zepp, or Garmin.
     </div>
   </footer>
 
@@ -682,14 +723,16 @@
       var tabAmazla = document.getElementById('device-tab-amazla');
       var tabKey = document.getElementById('device-tab-key');
       var tabGarmin = document.getElementById('device-tab-garmin');
+      var tabGarminAmazla = document.getElementById('device-tab-garmin-amazla');
       var panelAmazla = document.getElementById('device-panel-amazla');
       var panelKey = document.getElementById('device-panel-key');
       var panelGarmin = document.getElementById('device-panel-garmin');
+      var panelGarminAmazla = document.getElementById('device-panel-garmin-amazla');
 
       function showDevicePanel(which) {
-        var tabs = [tabAmazla, tabKey, tabGarmin];
-        var panels = [panelAmazla, panelKey, panelGarmin];
-        var keys = ['amazla', 'key', 'garmin'];
+        var tabs = [tabAmazla, tabKey, tabGarminAmazla, tabGarmin];
+        var panels = [panelAmazla, panelKey, panelGarminAmazla, panelGarmin];
+        var keys = ['amazla', 'key', 'garmin-amazla', 'garmin'];
         tabs.forEach(function (tab, i) {
           var active = keys[i] === which;
           panels[i].hidden = !active;
@@ -701,6 +744,7 @@
 
       tabAmazla.addEventListener('click', function () { showDevicePanel('amazla'); });
       tabKey.addEventListener('click', function () { showDevicePanel('key'); });
+      tabGarminAmazla.addEventListener('click', function () { showDevicePanel('garmin-amazla'); });
       tabGarmin.addEventListener('click', function () { showDevicePanel('garmin'); });
 
       var productTabAmazla = document.getElementById('product-tab-amazla');
@@ -761,7 +805,7 @@
         if (!carousel || !prev || !next) return;
         var track = carousel.firstElementChild;
         if (!track) return;
-        var isGarmin = carouselId === 'devices-carousel-garmin';
+        var isGarmin = carouselId.indexOf('devices-carousel-garmin') === 0;
         var maxScale = isGarmin ? 1.0 : 1.12;
         var scaleDrop = isGarmin ? 0.0 : 0.2;
 
@@ -808,6 +852,7 @@
 
       initCarousel('devices-carousel', 'devices-prev-btn', 'devices-next-btn');
       initCarousel('devices-carousel-key', 'devices-prev-btn-key', 'devices-next-btn-key');
+      initCarousel('devices-carousel-garmin-amazla', 'devices-prev-btn-garmin-amazla', 'devices-next-btn-garmin-amazla');
       initCarousel('devices-carousel-garmin', 'devices-prev-btn-garmin', 'devices-next-btn-garmin');
 
     })();

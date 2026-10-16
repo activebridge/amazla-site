@@ -1,861 +1,559 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Amazla — Control Tesla from Your Amazfit Watch</title>
-  <meta name="description" content="Two Amazfit Tesla apps: Amazla (free, cloud, full features) and Amazla Key ($10, BLE, no phone for daily use). Lock, climate, frunk, trunk, and more." />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-  <meta name="author" content="Amazla" />
-  <link rel="canonical" href="https://amazla.app/" />
-  <link rel="alternate" hreflang="en" href="https://amazla.app/" />
-  <link rel="alternate" hreflang="x-default" href="https://amazla.app/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Amazla" />
-  <meta property="og:title" content="Amazla — Control Tesla from Your Amazfit Watch" />
-  <meta property="og:description" content="Amazla (free, cloud) and Amazla Key ($10, BLE). Choose the Tesla watch app that fits how you drive." />
-  <meta property="og:url" content="https://amazla.app/" />
-  <meta property="og:image" content="https://amazla.app/images/logo-amazla-key.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Amazla — Tesla Control for Amazfit" />
-  <meta name="twitter:description" content="Free cloud app or $10 BLE key — control your Tesla from your Amazfit watch." />
-  <meta name="twitter:image" content="https://amazla.app/images/logo-amazla-key.png" />
-  <link rel="icon" type="image/png" href="/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "SoftwareApplication",
-          "name": "Amazla",
-          "applicationCategory": "UtilitiesApplication",
-          "operatingSystem": "Zepp OS 1.x",
-          "description": "Free Tesla control for Amazfit watches via Tesla Fleet API. Climate, defrost, charge port, remote commands anywhere with internet.",
-          "url": "https://amazla.app/#amazla",
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-          }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "name": "Amazla Key",
-          "applicationCategory": "UtilitiesApplication",
-          "operatingSystem": "Zepp OS 3.0+",
-          "description": "Premium BLE Tesla key for Amazfit watches. Lock, unlock, frunk, and trunk over Bluetooth with no phone for daily use.",
-          "url": "https://amazla.app/#amazla-key",
-          "offers": {
-            "@type": "Offer",
-            "price": "10",
-            "priceCurrency": "USD"
-          }
-        }
-      ]
-    }
-  </script>
-  <script type="module" crossorigin src="/assets/main-oDN5N8xE.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/main-rXCqli2Q.css">
-  <style id="key-head-pivot">
-    #hero-logo-key .logo-key-rotate {
-      transform-box: view-box;
-      transform-origin: 201.3px 173.7px;
-      transform: rotate(0);
-      will-change: transform;
-    }
-    #hero-logo-key .logo-key-slide {
-      will-change: transform;
-    }
-    .hero-logo-animate #hero-logo-key .logo-key-rotate {
-      animation: logo-key-rotate 2.5s 0.4s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
-    }
-    @keyframes logo-key-rotate {
-      0%   { transform: rotate(0); }
-      28%  { transform: rotate(85deg); }
-      34%  { transform: rotate(93deg); }
-      38%  { transform: rotate(90deg); }
-      to   { transform: rotate(90deg); }
-    }
-    .hero-logo-animate #hero-logo-key .logo-key-slide {
-      animation: logo-key-slide 2.5s 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-    @keyframes logo-key-slide {
-      0%  { transform: translate(0); }
-      40% { transform: translate(0); }
-      to  { transform: translate(-250px); }
-    }
-    #hero-logo-key .logo-key-counter {
-      transform-box: view-box;
-      transform-origin: 201.3px 173.7px;
-      transform: rotate(0);
-    }
-    .hero-logo-animate #hero-logo-key .logo-key-counter {
-      animation: logo-key-counter 2.5s 0.4s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
-    }
-    @keyframes logo-key-counter {
-      0% { transform: rotate(0); }
-      28% { transform: rotate(-85deg); }
-      34% { transform: rotate(-93deg); }
-      38% { transform: rotate(-90deg); }
-      to { transform: rotate(-90deg); }
-    }
-    .compare-table th,
-    .compare-table td {
-      padding: 0.75rem 1rem;
-      text-align: left;
-      border-bottom: 1px solid #e2e8f0;
-    }
-    .compare-table th {
-      font-weight: 600;
-      color: #0f172a;
-      background: #f8fafc;
-    }
-    .compare-table td {
-      color: #64748b;
-      font-size: 0.875rem;
-    }
-    .compare-table tr:last-child td {
-      border-bottom: none;
-    }
-    [id^="device-panel-garmin"] .devices-card-image {
-      /* Keep Garmin cards static: no transform-based clipping */
-      transform: none !important;
-    }
-    [id^="device-panel-garmin"] .devices-card-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: center;
-      display: block;
-    }
-    .device-tab-active {
-      /* Liquid glass active state (no unreadable white on mobile). */
-      background: rgba(255, 255, 255, 0.18);
-      color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.28);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.18);
-      backdrop-filter: blur(10px);
-    }
-    .device-tab:not(.device-tab-active):hover {
-      background: rgba(255, 255, 255, 0.12);
-      color: #ffffff;
-      backdrop-filter: blur(10px);
-    }
-    .device-tab:focus-visible {
-      outline: none;
-      background: rgba(255, 255, 255, 0.16);
-      border: 1px solid rgba(255, 255, 255, 0.28);
-      color: #ffffff;
-      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.18);
-      backdrop-filter: blur(10px);
-    }
-    .device-tabs {
-      display: inline-flex;
-      padding: 0.375rem;
-      gap: 0.25rem;
-      border-radius: 9999px;
-      background: rgba(255, 255, 255, 0.1);
-    }
-    .device-tab {
-      padding: 0.625rem 1.5rem;
-    }
-    @media (max-width: 767px) {
-      .device-tabs {
-        flex-wrap: wrap;
-        justify-content: center;
-        border-radius: 1.5rem;
-      }
-    }
-    .product-tabs {
-      display: inline-flex;
-      padding: 0.375rem;
-      gap: 0.25rem;
-      border-radius: 9999px;
-      background: #f1f5f9;
-    }
-    .product-tab {
-      padding: 0.625rem 1.5rem;
-    }
-    .product-tab-active {
-      background: white;
-      color: #0f172a;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-    }
-    .product-tabs-wrap {
-      margin-top: 2.5rem;
-      margin-bottom: 1.5rem;
-    }
-    .download-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-    @media (min-width: 1024px) {
-      .download-grid {
-        grid-template-columns: 1fr 1fr 1fr;
-      }
-    }
-    .hero-product-split {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-    @media (min-width: 640px) {
-      .hero-product-split {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 0.75rem 1.5rem;
-      }
-    }
-    @media (max-width: 640px) {
-      .download-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-    .device-panel[hidden],
-    .product-panel[hidden] {
-      display: none;
-    }
-    /* Section scroll snap — mobile only to avoid jarring desktop experience. */
-    @media (max-width: 1023px) {
-      html {
-        scroll-snap-type: y mandatory;
-      }
-      main > section,
-      footer {
-        scroll-snap-align: start;
-        scroll-snap-stop: always;
-      }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amazla: Tesla apps for Amazfit and Garmin watches</title>
+<meta name="description" content="Amazla Key turns your watch into a Bluetooth Tesla key: walk up, unlock, open the trunk, no phone needed. Amazla shows battery, climate and charging from anywhere.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://amazla.app/">
+<meta name="theme-color" content="#000000">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Amazla">
+<meta property="og:title" content="Amazla: your Tesla on your wrist">
+<meta property="og:description" content="A real Bluetooth Tesla key for your watch, and a dashboard that works from anywhere. For Amazfit and Garmin.">
+<meta property="og:url" content="https://amazla.app/">
+<meta property="og:image" content="https://amazla.app/images/logo-amazla-key.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="preload" href="/assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/images/app/key-closed.webp" as="image" type="image/webp" fetchpriority="high">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"Amazla Key","applicationCategory":"UtilitiesApplication","operatingSystem":"Zepp OS 3.0+, Garmin Connect IQ","description":"A Bluetooth Tesla key for your watch. Passive entry, lock, unlock, frunk and trunk with no phone and no internet.","url":"https://amazla.app/#key","offers":{"@type":"Offer","price":"9.99","priceCurrency":"USD"}},
+{"@type":"SoftwareApplication","name":"Amazla","applicationCategory":"UtilitiesApplication","operatingSystem":"Zepp OS, Garmin Connect IQ","description":"Tesla status and controls from anywhere: battery, range, lock, trunks, climate, seat heaters and charging.","url":"https://amazla.app/#amazla","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+]}
+</script>
+<style>
+@font-face{font-family:"Bricolage";src:url(/assets/fonts/bricolage.woff2) format("woff2");font-weight:200 800;font-display:swap}
+:root{
+  --bg:#000;--card:#0c0d10;--card2:#121318;--line:rgb(255 255 255/.09);
+  --text:#f4f5f7;--muted:#a7adb8;--dim:#8a909b;
+  --red:#ff2a32;--red2:#ff6a3d;--lime:#b8f03c;--green:#33d17a;
+  --display:"Bricolage",ui-sans-serif,system-ui,sans-serif;
+  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --gut:clamp(16px,4vw,40px);--max:1160px;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+main{overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.02;letter-spacing:-.035em;margin:0;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+ul,ol{margin:0;padding:0;list-style:none}
+figure{margin:0}
+.wrap{width:min(var(--max),100% - 2*var(--gut));margin-inline:auto}
+.skip{position:absolute;left:-999px;top:8px;background:#fff;color:#000;padding:10px 14px;border-radius:8px;z-index:20}
+.skip:focus{left:8px}
+a:focus-visible,summary:focus-visible,.table:focus-visible{outline:2px solid var(--lime);outline-offset:3px;border-radius:6px}
+.kicker{display:inline-flex;align-items:center;gap:.6em;font:600 13px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.kicker::before{content:"";width:26px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--red),var(--lime))}
+.h2{font-size:clamp(38px,6vw,72px)}
+.lead{font-size:clamp(17px,1.6vw,20px);color:var(--muted);max-width:60ch}
+.sec{padding:clamp(80px,11vw,150px) 0 0}
+.sec-head{display:grid;gap:18px;margin-bottom:clamp(32px,4vw,56px)}
+.red{color:var(--red)}.lime{color:var(--lime)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border-radius:99px;font:600 16px/1 var(--sans);text-decoration:none;transition:transform .2s,box-shadow .3s,background-color .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-sm{min-height:48px;padding:0 20px;font-size:15px}
+.btn-red{background:#e5121b;color:#fff;box-shadow:0 12px 40px -12px rgb(255 42 50/.8)}
+.btn-red:hover{box-shadow:0 18px 50px -10px rgb(255 42 50/.95)}
+.btn-lime{background:var(--lime);color:#0a0d02;box-shadow:0 12px 40px -12px rgb(184 240 60/.6)}
+.btn-ghost{border:1px solid var(--line);background:rgb(255 255 255/.04)}
+.btn-ghost:hover{background:rgb(255 255 255/.09)}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.small{font-size:14px;color:var(--dim)}
+.small a{color:var(--muted);display:inline-block;padding:6px 0}
+
+/* header */
+.top{position:sticky;top:0;z-index:10;background:rgb(0 0 0/.72);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:700 21px/1 var(--display);letter-spacing:-.02em}
+.brand img{width:32px;height:32px}
+.nav{display:flex;gap:4px}
+.nav a{padding:12px;border-radius:99px;text-decoration:none;color:var(--muted);font-size:15px}
+.nav a:hover{color:var(--text);background:rgb(255 255 255/.06)}
+@media (max-width:720px){.nav{display:none}}
+
+/* hero */
+.hero{position:relative;padding:clamp(48px,8vw,104px) 0 0}
+.hero::before{content:"";position:absolute;inset:-10% -20% auto;height:820px;background:radial-gradient(40% 50% at 70% 40%,rgb(255 42 50/.22),transparent 70%),radial-gradient(35% 40% at 88% 70%,rgb(184 240 60/.13),transparent 70%);pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,72px);align-items:center}
+.hero h1{font-size:clamp(48px,8.4vw,104px)}
+.hero h1 em{font-style:normal;background:linear-gradient(95deg,var(--red),var(--red2) 45%,var(--lime));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lead{margin:26px 0 34px}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:99px;border:1px solid var(--line);background:rgb(255 255 255/.03);font-size:14px;color:var(--muted)}
+.pill b{color:var(--text);font-weight:600}
+.stage{position:relative;aspect-ratio:1/1;max-width:540px;width:100%;justify-self:center}
+.stage .w1{position:absolute;width:74%;left:0;top:4%}
+.stage .w2{position:absolute;width:50%;right:0;bottom:2%}
+.chip{position:absolute;display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:14px;background:rgb(16 17 22/.9);border:1px solid var(--line);font:600 14px/1 var(--sans);box-shadow:0 20px 50px -20px #000}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
+.chip.c1{left:46%;top:0}
+.chip.c2{left:2%;bottom:12%}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr}.stage{max-width:440px}}
+
+/* watch */
+.watch{position:relative;border-radius:50%;padding:4.5%;background:linear-gradient(145deg,#3a3d45,#121318 40%,#2a2c33 70%,#0b0c0f);box-shadow:0 0 0 1px rgb(255 255 255/.06),inset 0 1px 1px rgb(255 255 255/.25),0 40px 90px -30px rgb(0 0 0/.9)}
+.watch .face{position:relative;border-radius:50%;overflow:hidden;background:#000;aspect-ratio:1/1}
+.watch .face img{width:100%;height:100%;object-fit:cover}
+.glow-red{filter:drop-shadow(0 30px 60px rgb(255 42 50/.28))}
+.glow-lime{filter:drop-shadow(0 30px 60px rgb(184 240 60/.2))}
+.swap .face img+img{position:absolute;inset:0;animation:swap 7s ease-in-out infinite}
+@keyframes swap{0%,38%{opacity:0}50%,88%{opacity:1}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.swap .face img+img{animation:none;opacity:0}.btn:hover{transform:none}html{scroll-behavior:auto}}
+
+/* two apps */
+.pick{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.app-card{position:relative;display:grid;gap:18px;align-content:start;padding:clamp(24px,3.4vw,40px);border-radius:28px;background:var(--card);border:1px solid var(--line);overflow:hidden}
+.app-card::before{content:"";position:absolute;inset:auto -30% -60% auto;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,var(--a),transparent);opacity:.18;pointer-events:none}
+.app-card.key{--a:var(--red)}.app-card.amz{--a:var(--lime)}
+.app-card .tag{justify-self:start;font:700 12px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;padding:7px 10px;border-radius:99px;border:1px solid color-mix(in srgb,var(--a) 50%,transparent);color:var(--a)}
+.app-card h3{font-size:clamp(30px,3.6vw,44px)}
+.app-card p{color:var(--muted)}
+.app-card .btn{justify-self:start}
+.ticks{display:grid;gap:10px}
+.ticks li{position:relative;padding-left:28px}
+.ticks li::before{content:"";position:absolute;left:0;top:.42em;width:16px;height:9px;border-left:2.5px solid var(--a,var(--lime));border-bottom:2.5px solid var(--a,var(--lime));transform:rotate(-45deg)}
+.price{display:flex;align-items:baseline;gap:8px;margin-top:4px}
+.price b{font:700 34px/1 var(--display);letter-spacing:-.03em;color:var(--text)}
+.price span{color:var(--muted)}
+@media (max-width:820px){.pick{grid-template-columns:1fr}}
+
+/* product */
+.split{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,6vw,88px);align-items:center}
+.split.rev{grid-template-columns:1.1fr .9fr}
+.split.rev .art{order:2}
+.art{display:grid;justify-items:center}
+.art .watch{width:min(100%,420px)}
+.art figcaption{margin-top:18px;font-size:14px;color:var(--dim);text-align:center}
+.feats{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:34px}
+.feat{padding:20px;border-radius:20px;background:var(--card);border:1px solid var(--line)}
+.feat h3{font:650 18px/1.25 var(--sans);letter-spacing:-.01em;margin-bottom:6px}
+.feat p{font-size:15px;color:var(--muted)}
+.feat .ic{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;margin-bottom:14px;background:color-mix(in srgb,var(--a) 14%,transparent);color:var(--a)}
+.feat .ic svg{width:22px;height:22px}
+.k{--a:var(--red)}.z{--a:var(--lime)}
+@media (max-width:900px){.split,.split.rev{grid-template-columns:1fr}.split.rev .art{order:0}}
+@media (max-width:560px){.feats{grid-template-columns:1fr}}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,3vw,36px);margin-top:clamp(36px,5vw,64px)}
+.gallery figure{display:grid;gap:14px;justify-items:center;text-align:center}
+.gallery .watch{width:100%}
+.gallery figcaption{font-size:15px;color:var(--muted)}
+.gallery figcaption b{display:block;color:var(--text);font-weight:600}
+@media (max-width:640px){.gallery{grid-template-columns:1fr;max-width:340px;margin-inline:auto}}
+
+/* steps */
+.howto{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.box{padding:clamp(24px,3.4vw,40px);border-radius:28px;background:var(--card);border:1px solid var(--line)}
+.box h3{font-size:clamp(26px,3vw,34px);margin-bottom:10px}
+.box>p{color:var(--muted)}
+.steps{counter-reset:s;display:grid;gap:16px;margin-top:24px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:rgb(255 42 50/.14);color:var(--red);font:700 17px/1 var(--display)}
+.steps b{display:block;font-weight:600}
+.steps span{color:var(--muted);font-size:15px}
+.note{margin-top:22px;padding:16px 18px;border-radius:16px;background:rgb(184 240 60/.07);border:1px solid rgb(184 240 60/.22);font-size:15px;color:var(--muted)}
+.note b{color:var(--lime)}
+@media (max-width:820px){.howto{grid-template-columns:1fr}}
+
+/* plans */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
+.plan{display:grid;gap:14px;align-content:start;padding:26px;border-radius:24px;background:var(--card);border:1px solid var(--line)}
+.plan.best{background:linear-gradient(var(--card2),var(--card2)) padding-box,linear-gradient(140deg,var(--lime),rgb(184 240 60/.1)) border-box;border:1px solid transparent}
+.plan h3{font:650 18px/1 var(--sans);letter-spacing:0;color:var(--muted)}
+.plan .ticks{font-size:15px}
+@media (max-width:820px){.plans{grid-template-columns:1fr}}
+
+/* compare */
+.table{overflow-x:auto;border-radius:24px;border:1px solid var(--line);background:var(--card)}
+table{width:100%;border-collapse:collapse;min-width:560px;font-size:16px}
+th,td{padding:16px 20px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child th,tr:last-child td{border-bottom:0}
+thead th{font:700 15px/1.2 var(--sans)}
+thead th:nth-child(2){color:var(--red)}thead th:nth-child(3){color:var(--lime)}
+tbody th{font-weight:500;color:var(--muted)}
+
+.garmin{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.gcard{display:grid;grid-template-columns:auto 1fr;gap:clamp(18px,3vw,32px);align-items:center;padding:clamp(22px,3vw,32px);border-radius:28px;background:var(--card);border:1px solid var(--line)}
+.gcard img{width:clamp(130px,16vw,190px)}
+.gcard .round{border-radius:50%;box-shadow:0 0 0 6px #1b1c21,0 0 0 7px rgb(255 255 255/.08),0 30px 60px -20px rgb(184 240 60/.25)}
+.gcard h3{font-size:clamp(26px,3vw,34px)}
+.gcard p{color:var(--muted);margin:10px 0 18px;font-size:15px}
+.gcard .as{display:block;font:600 13px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:10px}
+@media (max-width:900px){.garmin{grid-template-columns:1fr}}
+@media (max-width:480px){.gcard{grid-template-columns:1fr;justify-items:start}}
+.devs+.devs{margin-top:18px}
+.os{font:700 13px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+
+/* watches */
+.devs{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chips li{padding:8px 12px;border-radius:10px;background:rgb(255 255 255/.04);border:1px solid var(--line);font-size:14px;color:var(--muted)}
+.chips li.plus{color:var(--lime);border-color:rgb(184 240 60/.3)}
+@media (max-width:820px){.devs{grid-template-columns:1fr}}
+
+/* faq */
+.faq{display:grid;gap:10px;max-width:860px}
+.faq details{border-radius:18px;background:var(--card);border:1px solid var(--line)}
+.faq summary{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 22px;cursor:pointer;font-weight:600;list-style:none;min-height:48px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";flex:none;width:10px;height:10px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg) translateY(-3px);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(-135deg)}
+.faq details p{padding:0 22px 20px;color:var(--muted)}
+.faq a{color:var(--text)}
+
+/* final */
+.final{margin-top:clamp(80px,11vw,150px);padding:clamp(48px,7vw,88px) 0;border-top:1px solid var(--line);background:radial-gradient(50% 80% at 50% 0,rgb(255 42 50/.16),transparent 70%)}
+.final .wrap{display:grid;gap:22px;justify-items:center;text-align:center}
+.final h2{font-size:clamp(44px,7vw,88px)}
+.stores{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;width:min(760px,100%);margin-top:16px;text-align:left}
+.store{display:grid;gap:14px;padding:22px;border-radius:22px;background:var(--card);border:1px solid var(--line)}
+.store h3{font:650 18px/1.2 var(--sans);letter-spacing:0}
+.store .btn{flex:1 1 auto}
+@media (max-width:640px){.stores{grid-template-columns:1fr}}
+footer{padding:28px 0 40px;border-top:1px solid var(--line);color:var(--dim);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 28px;justify-content:space-between;align-items:center}
+footer nav{display:flex;flex-wrap:wrap;gap:0 18px}
+footer a{color:var(--muted);text-decoration:none;display:inline-block;padding:12px 0}
+footer a:hover{color:var(--text)}
+</style>
 </head>
-<body class="bg-amazla-background text-amazla-dark font-sans antialiased">
-  <header class="fixed top-0 left-0 right-0 z-50 bg-amazla-background/90 backdrop-blur-sm border-b border-slate-200/50">
-    <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <a href="#" class="flex items-center gap-2" aria-label="Amazla home">
-        <img src="/images/logo-amazla-key.png" alt="" class="h-8 w-8 rounded-full object-cover" width="32" height="32" />
-        <span class="font-bold text-amazla-dark text-lg tracking-tight">Amazla</span>
-      </a>
-      <div class="flex items-center gap-4 sm:gap-6">
-        <a href="#products" class="text-sm font-medium text-amazla-secondary hover:text-amazla-dark transition-colors hidden sm:block">Products</a>
-        <a href="#compare" class="text-sm font-medium text-amazla-secondary hover:text-amazla-dark transition-colors hidden sm:block">Compare</a>
-        <a href="#devices" class="text-sm font-medium text-amazla-secondary hover:text-amazla-dark transition-colors hidden sm:block">Devices</a>
-        <a href="/how-it-works.html" class="text-sm font-medium text-amazla-secondary hover:text-amazla-dark transition-colors hidden sm:block">How it works</a>
-        <a href="#download" class="text-sm font-semibold text-white bg-amazla-primary hover:bg-red-600 rounded-lg px-4 py-2 transition-colors shadow-lg shadow-red-500/25">Get started</a>
-      </div>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/favicon.svg" alt="" width="32" height="32">Amazla</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#key">Amazla Key</a>
+      <a href="#amazla">Amazla</a>
+      <a href="#garmin">Garmin</a>
+      <a href="#watches">Watches</a>
+      <a href="#faq">FAQ</a>
     </nav>
-  </header>
+    <a class="btn btn-red btn-sm" href="#get">Get the apps</a>
+  </div>
+</header>
 
-  <main>
-    <!-- Hero -->
-    <section id="hero" class="hero-logo-animate relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-      <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-amazla-primary/5 rounded-full blur-3xl" data-parallax="0.08"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-amazla-accent/5 rounded-full blur-3xl" data-parallax="0.12"></div>
-        <div class="absolute -top-24 right-10 w-64 h-64 border border-amazla-primary/20 rounded-3xl rotate-6" data-parallax="0.05"></div>
-        <div class="absolute -bottom-28 -left-10 w-72 h-72 border border-amazla-accent/15 rounded-3xl -rotate-6" data-parallax="0.04"></div>
+<main id="main">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="kicker">Tesla apps for Amazfit and Garmin</p>
+        <h1>Your Tesla, <em>on your wrist.</em></h1>
+        <p class="lead">Amazla Key makes your watch a real Bluetooth key: walk up, unlock, open the trunk, no phone in your pocket. Amazla shows battery, climate and charging from anywhere.</p>
+        <div class="ctas">
+          <a class="btn btn-red" href="#key">Meet Amazla Key</a>
+          <a class="btn btn-ghost" href="#amazla">See Amazla</a>
+        </div>
+        <ul class="pills" aria-label="Highlights">
+          <li class="pill"><b>No phone</b> at the car</li>
+          <li class="pill"><b>Works offline</b> over Bluetooth</li>
+          <li class="pill">On <b>Amazfit</b> and <b>Garmin</b></li>
+        </ul>
       </div>
-      <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 flex flex-col lg:flex-row items-center lg:items-start gap-0 md:gap-12 lg:gap-16">
-        <div class="flex-1 min-w-0 lg:flex-[2] order-last lg:order-none text-center lg:text-left" data-animate="left">
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-amazla-dark tracking-tight">
-            Control your Tesla<br />
-            <span class="text-amazla-primary">from your wrist</span>
-          </h1>
-          <div class="hero-reveal-after">
-            <div class="hero-product-split mt-8 max-w-xl mx-auto lg:mx-0 text-left">
-              <div>
-                <a href="#amazla" class="inline-flex items-center justify-center font-semibold text-amazla-dark bg-white border-2 border-slate-200 hover:border-amazla-accent hover:text-amazla-accent rounded-xl px-8 py-4 transition-all duration-200 w-full sm:w-auto">
-                  Amazla — Free
-                </a>
-                <p class="mt-2 text-xs text-amazla-secondary px-1">Cloud control · Amazfit &amp; Garmin</p>
-              </div>
-              <div>
-                <a href="#amazla-key" class="inline-flex items-center justify-center font-semibold text-white bg-amazla-primary hover:bg-red-600 rounded-xl px-8 py-4 transition-all duration-200 shadow-lg shadow-red-500/25 w-full sm:w-auto">
-                  Amazla Key
-                </a>
-                <p class="mt-2 text-xs text-amazla-secondary px-1">Direct BLE key for near-car daily access</p>
-              </div>
-              <div>
-                <a href="https://apps.garmin.com/apps/4571dbca-7c1e-4d04-9636-82ddb54283a6" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center font-semibold text-white bg-amazla-accent hover:bg-sky-600 rounded-xl px-8 py-4 transition-all duration-200 shadow-lg shadow-sky-500/20 w-full sm:w-auto">
-                  Tesla Key
-                </a>
-                <p class="mt-2 text-xs text-amazla-secondary px-1">BLE key for Garmin watches</p>
-              </div>
-              <div>
-                <a href="#compare" class="inline-flex items-center justify-center font-semibold text-slate-700 bg-white border-2 border-slate-300 hover:border-amazla-accent/50 hover:text-amazla-accent hover:bg-amazla-accent/10 rounded-xl px-8 py-4 transition-all duration-200 shadow-sm hover:shadow-lg hover:shadow-amazla-accent/10 w-full sm:w-auto">
-                  Compare apps
-                </a>
-                <p class="mt-2 text-xs text-amazla-secondary px-1">See how the apps differ</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="relative flex-1 min-w-0 lg:flex-[1] order-first lg:order-none flex flex-row items-end justify-center gap-1 min-h-0 -mt-12 lg:mt-0 lg:flex-col lg:items-end lg:justify-start w-full gap-6 lg:gap-8" data-animate="right">
-          <div class="flex-shrink-0 order-2 lg:order-none w-1/2 justify-start flex items-center lg:justify-end max-lg:h-40 max-lg:max-h-[180px] lg:w-full h-[42vh] min-h-[220px] lg:h-[48vh] lg:min-h-[260px] lg:ml-0" data-parallax="0.03">
-            <svg id="hero-logo-key" class="h-full w-auto object-contain block" viewBox="-200 0 600 521.8436873747495" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Amazla app on Amazfit watch"><g class="logo-key-slide"><g id="svgg"><path id="path0" class="logo-key-rotate" d="M152.295 12.967 C 146.190 15.477,143.868 19.310,141.815 30.261 C 140.961 34.823,140.578 36.847,140.012 39.800 C 139.759 41.120,139.368 43.190,139.144 44.400 C 138.604 47.307,138.175 49.255,137.383 52.400 C 137.023 53.830,136.589 55.630,136.420 56.400 C 136.250 57.170,135.837 58.520,135.503 59.400 C 135.169 60.280,134.662 61.810,134.376 62.800 C 134.090 63.790,133.738 64.780,133.593 65.000 C 133.449 65.220,132.904 66.480,132.382 67.800 C 131.326 70.470,129.188 74.697,127.265 77.918 C 126.569 79.082,126.000 80.125,126.000 80.234 C 126.000 80.776,119.908 88.233,116.861 91.421 C 112.645 95.833,110.343 98.363,108.076 101.077 C 106.488 102.978,106.244 103.124,104.993 102.921 C 104.061 102.770,103.147 102.955,102.079 103.512 C 101.063 104.042,100.328 104.200,99.961 103.968 C 96.890 102.023,94.207 104.219,89.993 112.130 C 88.214 115.468,86.491 118.650,86.165 119.200 C 82.991 124.545,82.861 128.237,85.780 130.150 C 86.617 130.698,86.800 131.133,86.800 132.574 C 86.800 134.033,87.002 134.499,88.000 135.339 C 89.467 136.573,89.540 137.814,88.366 141.547 C 86.971 145.988,86.800 146.627,86.795 147.428 C 86.772 150.597,85.423 152.895,83.190 153.568 C 81.301 154.138,80.871 154.463,80.060 155.932 C 79.381 157.163,78.797 157.701,77.956 157.869 C 74.085 158.643,73.000 161.998,73.000 173.200 C 73.000 184.447,73.442 185.825,77.500 187.218 C 78.859 187.684,79.508 188.207,80.150 189.353 C 80.815 190.540,81.435 191.021,82.999 191.561 C 85.263 192.343,85.695 192.978,86.431 196.600 C 86.896 198.886,87.602 201.737,88.462 204.800 C 89.356 207.980,89.354 207.998,88.051 209.272 C 86.983 210.316,86.800 210.784,86.800 212.473 C 86.800 214.161,86.631 214.594,85.652 215.418 C 82.693 217.907,82.926 220.504,86.788 228.118 C 93.621 241.592,95.322 243.310,100.112 241.578 C 101.357 241.127,101.627 241.164,102.712 241.938 C 103.390 242.420,104.531 242.800,105.304 242.800 C 106.342 242.800,106.924 243.090,107.655 243.972 C 110.744 247.701,115.223 252.468,120.271 257.400 C 123.423 260.480,126.002 263.164,126.001 263.364 C 126.001 263.564,126.682 264.644,127.516 265.764 C 130.442 269.693,134.313 276.752,135.873 281.000 C 136.196 281.880,136.602 282.873,136.776 283.208 C 137.461 284.527,139.860 292.854,141.181 298.500 C 144.102 310.983,144.864 312.882,148.166 315.899 C 152.972 320.292,153.913 320.446,175.373 320.345 C 198.621 320.236,195.557 320.237,220.800 320.342 C 256.226 320.490,255.985 320.618,260.800 299.000 C 262.563 291.084,263.708 287.179,265.606 282.600 C 265.789 282.160,266.263 280.990,266.661 280.000 C 267.956 276.773,272.193 268.648,273.961 266.000 C 274.328 265.450,274.892 264.473,275.214 263.828 C 275.725 262.806,277.780 260.484,283.200 254.804 C 283.970 253.997,286.130 251.564,288.000 249.396 C 289.870 247.229,292.030 244.762,292.800 243.914 L 294.200 242.373 296.361 242.788 C 298.399 243.179,298.600 243.142,299.915 242.139 C 301.063 241.263,301.440 241.157,302.049 241.538 C 302.941 242.095,305.574 242.142,306.931 241.626 C 308.014 241.215,310.251 237.693,314.540 229.649 C 319.594 220.172,319.860 218.138,316.440 215.097 C 315.449 214.215,315.200 213.677,315.200 212.413 C 315.200 211.076,314.947 210.598,313.562 209.316 C 311.870 207.751,311.589 205.576,312.779 203.265 C 312.968 202.899,313.310 201.880,313.539 201.000 C 314.779 196.245,315.076 195.439,315.996 194.345 C 316.827 193.357,317.611 193.015,320.533 192.367 C 329.308 190.420,329.577 189.810,329.590 171.779 L 329.600 159.357 328.559 157.267 C 326.977 154.092,325.668 153.323,319.965 152.218 C 318.449 151.924,317.002 150.639,315.835 148.550 L 314.805 146.708 316.011 144.921 C 320.199 138.716,319.875 132.534,315.125 128.002 C 312.974 125.951,313.026 125.573,315.601 124.575 C 320.152 122.812,320.169 118.967,315.656 112.450 C 315.256 111.873,313.978 109.600,312.816 107.400 C 310.292 102.623,308.259 99.830,306.522 98.754 L 305.243 97.962 303.522 98.839 C 302.575 99.321,301.243 100.139,300.562 100.658 C 298.909 101.916,298.989 101.970,298.008 98.933 C 295.964 92.606,292.637 90.023,286.384 89.907 C 281.411 89.815,277.454 85.322,270.969 72.400 C 268.852 68.183,268.807 68.077,267.583 64.400 C 267.107 62.970,266.568 61.440,266.386 61.000 C 265.535 58.947,263.096 48.423,261.982 42.000 C 261.772 40.790,261.429 38.900,261.218 37.800 C 261.007 36.700,260.631 34.720,260.381 33.400 C 260.131 32.080,259.779 30.280,259.600 29.400 C 259.421 28.520,259.083 26.740,258.849 25.445 C 257.971 20.580,255.165 16.155,251.646 14.085 C 247.959 11.916,250.319 12.012,200.800 12.016 L 154.600 12.019 152.295 12.967 M214.400 53.175 C 215.610 53.417,217.590 53.805,218.800 54.037 C 223.267 54.895,232.478 57.391,233.400 57.994 C 233.620 58.138,234.610 58.501,235.600 58.800 C 236.590 59.099,237.580 59.462,237.800 59.607 C 238.020 59.751,239.280 60.296,240.600 60.818 C 246.071 62.982,254.614 67.990,259.594 71.954 C 261.673 73.609,259.923 73.186,256.620 71.234 C 254.725 70.116,253.107 69.200,253.023 69.200 C 252.940 69.200,251.550 68.584,249.936 67.831 C 244.239 65.173,237.796 62.928,228.739 60.442 C 223.472 58.997,211.505 57.200,207.150 57.200 L 204.879 57.200 204.620 61.900 C 204.285 68.007,204.212 68.283,202.689 69.211 C 198.400 71.826,195.650 68.648,195.638 61.059 C 195.631 56.632,196.232 56.965,189.315 57.553 C 174.605 58.803,161.098 62.657,146.989 69.631 C 138.270 73.941,137.692 73.834,144.612 69.192 C 156.226 61.400,168.898 56.246,181.900 54.027 C 183.275 53.792,185.435 53.420,186.700 53.199 C 187.965 52.978,189.720 52.726,190.600 52.638 C 193.726 52.324,212.236 52.742,214.400 53.175 M210.779 88.434 C 212.661 88.673,214.830 89.013,215.600 89.189 C 225.348 91.416,226.834 91.846,232.200 93.995 C 234.651 94.976,242.039 98.692,243.472 99.665 C 244.392 100.289,245.249 100.800,245.376 100.800 C 245.595 100.800,247.806 102.304,251.400 104.898 C 286.782 130.436,295.730 183.950,270.813 221.000 C 253.163 247.246,219.761 262.862,190.833 258.393 C 184.371 257.395,182.377 257.022,179.000 256.183 C 177.020 255.690,174.320 254.892,173.000 254.409 C 171.680 253.925,169.661 253.186,168.514 252.766 C 166.355 251.976,162.400 250.256,161.000 249.499 C 156.788 247.220,155.322 246.347,152.200 244.263 C 147.014 240.801,141.312 236.091,138.488 232.935 C 137.141 231.431,135.297 229.390,134.390 228.400 C 122.221 215.124,114.323 193.773,114.267 174.000 C 114.166 138.333,133.974 108.572,167.600 93.872 C 172.186 91.867,180.916 89.584,188.400 88.432 C 191.652 87.932,206.833 87.933,210.779 88.434 M121.075 98.361 C 123.781 100.337,123.575 105.565,120.734 107.034 C 115.917 109.525,110.901 104.545,113.650 100.000 C 115.302 97.269,118.587 96.543,121.075 98.361 M286.710 98.529 C 288.828 100.459,289.175 102.172,287.959 104.685 C 285.058 110.677,276.027 106.819,278.591 100.682 C 279.932 97.474,284.287 96.319,286.710 98.529 M309.100 134.250 C 312.192 137.777,309.783 142.797,305.000 142.797 C 302.184 142.797,299.600 140.385,299.600 137.757 C 299.600 132.924,305.899 130.599,309.100 134.250 M121.414 239.213 C 123.497 241.170,123.572 245.111,121.563 247.036 C 118.776 249.706,114.277 248.447,113.229 244.704 C 111.862 239.820,117.811 235.828,121.414 239.213 M285.087 238.668 C 289.961 240.981,288.217 248.400,282.800 248.400 C 277.773 248.400,275.858 241.382,280.168 238.754 C 281.692 237.825,283.252 237.797,285.087 238.668 M142.800 274.006 C 148.433 277.813,165.571 284.509,174.000 286.196 C 174.770 286.350,177.020 286.818,179.000 287.236 C 182.962 288.072,195.052 289.339,195.634 288.979 C 195.835 288.855,196.000 286.774,196.000 284.357 C 196.000 278.446,197.166 276.381,200.486 276.413 C 203.635 276.443,204.794 278.558,204.797 284.276 C 204.799 286.857,204.971 288.859,205.204 289.003 C 205.902 289.434,216.757 288.258,222.400 287.140 C 234.171 284.808,241.144 282.392,253.300 276.431 C 256.765 274.731,259.600 273.408,259.600 273.489 C 259.600 276.461,240.029 286.366,225.800 290.594 C 204.011 297.068,178.219 294.192,155.000 282.698 C 150.157 280.300,140.777 274.225,140.489 273.300 C 140.302 272.699,141.331 273.013,142.800 274.006 " stroke="none" fill="#243043" fill-rule="evenodd"></path><g id="hero-logo-mark" class="logo-key-rotate"><g class="logo-key-counter"><defs><clipPath id="hero-logo-clip"><circle cx="201.2" cy="172.7" r="87.5"/></clipPath></defs><image href="/images/logo-amazla-key.png" xlink:href="/images/logo-amazla-key.png" x="113.7" y="85.2" width="175" height="175" preserveAspectRatio="xMidYMid meet" clip-path="url(#hero-logo-clip)" /></g></g><path id="path1-blade" class="logo-key-rotate" d="M163.842 321.015 C 163.153 321.704,163.015 325.485,163.535 329.386 C 163.888 332.032,165.474 333.194,168.759 333.213 C 172.716 333.235,172.400 331.260,172.400 355.980 L 172.400 377.672 175.124 380.336 C 176.623 381.801,178.779 383.810,179.916 384.800 C 182.173 386.766,182.137 386.631,182.036 392.737 L 182.000 394.873 178.180 398.522 C 171.499 404.903,171.491 404.989,177.000 410.362 L 181.200 414.459 181.200 418.932 L 181.200 423.405 177.960 426.803 C 172.436 432.595,172.400 432.664,172.400 437.282 L 172.400 441.244 177.600 446.291 L 182.800 451.338 182.800 453.678 L 182.800 456.019 179.500 459.506 C 177.685 461.424,175.866 463.243,175.458 463.549 C 175.050 463.854,174.195 464.926,173.558 465.930 L 172.400 467.757 172.400 476.699 L 172.400 485.642 175.900 489.086 C 185.976 499.001,192.071 504.800,192.415 504.800 C 192.661 504.800,192.800 471.422,192.800 412.628 L 192.800 320.457 178.642 320.415 C 166.145 320.379,164.408 320.449,163.842 321.015 M199.600 415.001 C 199.600 508.091,199.612 509.578,200.374 509.986 C 201.674 510.682,202.107 510.479,204.800 507.911 C 213.248 499.854,214.669 498.472,215.777 497.234 L 217.000 495.869 217.200 486.634 L 217.400 477.400 227.481 477.200 C 238.974 476.972,238.489 477.135,238.321 473.559 L 238.200 471.000 227.800 470.800 L 217.400 470.600 217.182 466.800 C 216.920 462.235,216.893 462.171,214.322 459.972 C 210.172 456.423,209.955 455.056,213.146 452.577 C 216.459 450.005,216.520 449.805,216.714 440.994 C 216.928 431.279,216.762 430.608,213.341 427.332 L 210.764 424.863 210.882 421.932 L 211.000 419.000 219.100 418.892 L 227.200 418.783 227.200 409.565 C 227.200 399.174,227.282 398.800,229.565 398.800 C 232.075 398.800,232.184 399.154,232.327 407.760 L 232.454 415.400 233.884 416.875 C 235.466 418.507,237.455 419.519,237.979 418.958 C 238.418 418.487,238.763 394.794,238.347 393.669 C 238.066 392.910,222.108 392.181,221.518 392.900 C 221.473 392.955,221.338 397.410,221.218 402.800 L 221.000 412.600 219.000 412.600 L 217.000 412.600 216.800 405.200 C 216.578 396.994,216.593 397.043,213.401 394.000 C 211.408 392.101,210.800 390.803,210.800 388.448 C 210.800 385.066,210.209 385.200,225.179 385.200 L 238.300 385.200 238.550 383.950 C 238.688 383.263,238.800 378.508,238.800 373.384 L 238.800 364.068 236.933 362.425 C 235.084 360.797,233.424 360.043,232.881 360.585 C 232.727 360.739,232.546 364.989,232.479 370.030 C 232.359 379.131,232.352 379.197,231.466 379.419 C 229.569 379.895,212.060 379.422,211.519 378.880 C 211.045 378.405,210.930 371.519,211.167 357.887 C 211.200 356.001,212.215 354.442,214.136 353.328 C 216.427 352.000,216.800 350.380,216.800 341.758 C 216.800 332.619,216.879 332.383,219.697 333.113 L 221.000 333.450 221.200 343.825 L 221.400 354.200 229.798 354.200 L 238.196 354.200 238.549 352.529 C 238.743 351.610,238.785 350.395,238.643 349.829 L 238.385 348.800 233.669 348.800 C 227.148 348.800,227.557 349.361,227.690 340.598 L 227.800 333.400 232.441 333.200 C 238.656 332.932,238.400 333.224,238.400 326.394 L 238.400 320.887 237.401 320.636 C 236.852 320.498,228.122 320.396,218.001 320.408 L 199.600 320.431 199.600 415.001 M221.467 426.667 C 221.128 427.005,221.124 450.676,221.462 451.939 C 221.988 453.903,226.066 451.868,226.784 449.283 C 227.309 447.393,227.328 433.040,226.808 431.227 C 226.134 428.879,222.423 425.710,221.467 426.667 M232.643 427.033 C 232.093 428.466,232.379 451.418,232.956 452.208 C 233.646 453.151,236.272 451.572,237.553 449.444 C 239.321 446.507,239.091 431.252,237.248 429.252 C 235.044 426.861,233.073 425.911,232.643 427.033 " stroke="none" fill="#c82a29" fill-rule="evenodd"></path></g></g>            </svg>
-          </div>
-          <div class="hero-text-logo flex-shrink-0 order-1 lg:order-none self-start pt-12 lg:self-auto lg:pt-0 relative flex w-1/2 justify-end lg:justify-end lg:w-auto lg:absolute lg:bottom-8 lg:right-24 lg:w-full" aria-hidden="true">
-            <svg class="h-14 sm:h-16 lg:h-24 w-auto max-lg:max-h-16" viewBox="0 0 235 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Amazla">
-              <defs>
-                <style>.dark-text{fill:#243043;font-family:sans-serif;font-weight:bold}.gray-text{fill:#64748B;font-family:sans-serif;font-weight:normal}</style>
-              </defs>
-              <text x="0" y="52" font-size="42" class="dark-text">AMAZLA</text>
-              <text x="0" y="88" font-size="20" class="gray-text">Amazfit to Tesla Control</text>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Compare -->
-    <section class="relative py-24 lg:py-28 bg-white overflow-hidden" id="compare">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12" data-animate>
-          <h2 class="text-3xl sm:text-4xl font-bold text-amazla-dark">Compare apps</h2>
-          <p class="mt-4 text-lg text-amazla-secondary">Amazla runs on Amazfit and Garmin. Amazla Key (Amazfit) and Tesla Key (Garmin) add direct BLE access.</p>
-        </div>
-        <div class="overflow-x-auto rounded-2xl border border-slate-200 shadow-lg" data-animate>
-          <table class="compare-table w-full min-w-[52rem]">
-            <thead>
-              <tr>
-                <th class="w-1/4"></th>
-                <th class="w-1/4">Amazla <span class="text-amazla-accent font-normal text-sm">(Free)</span></th>
-                <th class="w-1/4">Amazla Key <span class="text-amazla-primary font-normal text-sm">($10)</span></th>
-                <th class="w-1/4">Tesla Key</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td class="font-medium text-amazla-dark">Connection</td><td>Internet → Fleet API</td><td>BLE (VCSEC)</td><td>BLE (VCSEC)</td></tr>
-              <tr><td class="font-medium text-amazla-dark">Phone required daily</td><td>Yes — every command</td><td>No — setup only</td><td>No</td></tr>
-              <tr><td class="font-medium text-amazla-dark">Range</td><td>Anywhere with internet</td><td>~10–15 m (BLE)</td><td>~10–15 m (BLE)</td></tr>
-              <tr><td class="font-medium text-amazla-dark">Lock / Unlock / Frunk / Trunk</td><td>Cloud</td><td>BLE</td><td>BLE</td></tr>
-              <tr><td class="font-medium text-amazla-dark">Climate &amp; Defrost</td><td>Yes</td><td>No</td><td>No</td></tr>
-              <tr><td class="font-medium text-amazla-dark">Charge Port</td><td>Yes</td><td>No</td><td>Planned</td></tr>
-              <tr><td class="font-medium text-amazla-dark">Vehicle Status</td><td>Live</td><td>No</td><td>Live — doors &amp; lock</td></tr>
-              <tr><td class="font-medium text-amazla-dark">Watch Platform</td><td>Amazfit (ZeppOS 1.x) &amp; Garmin</td><td>Amazfit, ZeppOS 3.0+</td><td>Garmin</td></tr>
-              <tr><td class="font-medium text-amazla-dark">Price</td><td>Free</td><td>$10 one-time</td><td>€11.49 one-time</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- Products -->
-    <section class="relative py-20 lg:py-28 bg-white overflow-hidden" id="products">
-      <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div class="absolute -top-24 left-10 w-64 h-64 bg-amazla-accent/5 rounded-full blur-3xl" data-parallax="0.06"></div>
-        <div class="absolute -right-20 top-10 w-80 h-80 bg-amazla-primary/10 rounded-full blur-3xl" data-parallax="0.09"></div>
-      </div>
-      <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-8" data-animate>
-          <h2 class="text-3xl sm:text-4xl font-bold text-amazla-dark">Products</h2>
-          <p class="mt-4 text-lg text-amazla-secondary">Pick free cloud control on Amazfit or Garmin, or a BLE key — Amazla Key for Amazfit, Tesla Key for Garmin.</p>
-        </div>
-        <div class="product-tabs-wrap flex justify-center" role="tablist" aria-label="Product details">
-          <div class="product-tabs">
-            <button type="button" id="product-tab-amazla" class="product-tab product-tab-active rounded-full text-sm font-semibold transition-colors" role="tab" aria-selected="true" aria-controls="amazla">Amazla</button>
-            <button type="button" id="product-tab-key" class="product-tab rounded-full text-sm font-semibold text-slate-500 hover:text-amazla-dark transition-colors" role="tab" aria-selected="false" aria-controls="amazla-key">Amazla Key</button>
-            <button type="button" id="product-tab-tesla" class="product-tab rounded-full text-sm font-semibold text-slate-500 hover:text-amazla-dark transition-colors" role="tab" aria-selected="false" aria-controls="tesla-key">Tesla Key</button>
-          </div>
-        </div>
-
-        <div id="amazla" class="product-panel" role="tabpanel" data-animate>
-          <div class="max-w-3xl mx-auto text-center sm:text-left">
-            <span class="inline-flex items-center rounded-full bg-amazla-accent/10 text-amazla-accent px-4 py-2 text-sm font-semibold tracking-wide uppercase">Free · Cloud</span>
-            <h3 class="mt-6 text-2xl sm:text-3xl font-bold text-amazla-dark">Amazla</h3>
-            <p class="mt-4 text-lg text-amazla-secondary">
-              Full Tesla control over the internet via Tesla Fleet API. Lock, climate, frunk, trunk, charge port, and live status — through your phone.
-            </p>
-            <ul class="mt-6 space-y-2 text-amazla-secondary text-sm inline-block text-left">
-              <li class="flex items-start gap-2"><span class="w-2 h-2 rounded-full bg-amazla-accent mt-1.5 flex-shrink-0"></span> Remote access from anywhere with cell service</li>
-              <li class="flex items-start gap-2"><span class="w-2 h-2 rounded-full bg-slate-400 mt-1.5 flex-shrink-0"></span> Phone with internet required for every command</li>
-              <li class="flex items-start gap-2"><span class="w-2 h-2 rounded-full bg-slate-400 mt-1.5 flex-shrink-0"></span> Amazfit: ZeppOS 1.x — 23+ older models</li>
-              <li class="flex items-start gap-2"><span class="w-2 h-2 rounded-full bg-amazla-accent mt-1.5 flex-shrink-0"></span> Garmin: now on Connect IQ — free, same cloud control</li>
-            </ul>
-            <div class="mt-6">
-              <a href="https://apps.garmin.com/apps/0b68560b-0407-45db-9edc-1cc1246215da" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center font-semibold text-amazla-dark bg-white border-2 border-slate-200 hover:border-amazla-accent hover:text-amazla-accent rounded-xl px-8 py-4 transition-all duration-200">Get Amazla for Garmin</a>
-            </div>
-          </div>
-          <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6" data-animate-stagger>
-            <article class="bg-amazla-background rounded-2xl p-6" data-animate-stagger-item>
-              <h3 class="font-semibold text-amazla-dark">Lock &amp; Unlock</h3>
-              <p class="mt-2 text-amazla-secondary text-sm">Remote lock and unlock via Fleet API.</p>
-            </article>
-            <article class="bg-amazla-background rounded-2xl p-6" data-animate-stagger-item>
-              <h3 class="font-semibold text-amazla-dark">Climate &amp; Defrost</h3>
-              <p class="mt-2 text-amazla-secondary text-sm">HVAC on/off, defrost, temperature display.</p>
-            </article>
-            <article class="bg-amazla-background rounded-2xl p-6" data-animate-stagger-item>
-              <h3 class="font-semibold text-amazla-dark">Frunk, Trunk &amp; Charge Port</h3>
-              <p class="mt-2 text-amazla-secondary text-sm">Open frunk, trunk, and charge port remotely.</p>
-            </article>
-            <article class="bg-amazla-background rounded-2xl p-6" data-animate-stagger-item>
-              <h3 class="font-semibold text-amazla-dark">Vehicle Status</h3>
-              <p class="mt-2 text-amazla-secondary text-sm">Battery, range, charging, and door status.</p>
-            </article>
-          </div>
-        </div>
-
-        <div id="amazla-key" class="product-panel" role="tabpanel" hidden data-animate>
-          <div class="max-w-3xl mx-auto text-center sm:text-left">
-            <span class="inline-flex items-center rounded-full bg-amazla-primary/10 text-amazla-primary px-4 py-2 text-sm font-semibold tracking-wide uppercase">$10 one-time · BLE</span>
-            <h3 class="mt-6 text-2xl sm:text-3xl font-bold text-amazla-dark">Amazla Key</h3>
-            <p class="mt-4 text-lg text-amazla-secondary">
-              A Tesla key on your wrist. Lock, unlock, frunk, and trunk over Bluetooth (VCSEC) — no internet needed for daily use.
-            </p>
-            <ul class="mt-6 space-y-2 text-amazla-secondary text-sm inline-block text-left">
-              <li class="flex items-start gap-2"><span class="w-2 h-2 rounded-full bg-amazla-primary mt-1.5 flex-shrink-0"></span> BLE range ~10–15 m, no phone relay for commands</li>
-              <li class="flex items-start gap-2"><span class="w-2 h-2 rounded-full bg-slate-400 mt-1.5 flex-shrink-0"></span> One-time pairing and Tesla sign-in at setup</li>
-              <li class="flex items-start gap-2"><span class="w-2 h-2 rounded-full bg-slate-400 mt-1.5 flex-shrink-0"></span> ZeppOS 3.0+ — newer Amazfit watches only</li>
-            </ul>
-          </div>
-          <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6" data-animate-stagger>
-            <article class="bg-amazla-background rounded-2xl p-6" data-animate-stagger-item>
-              <h3 class="font-semibold text-amazla-dark">Lock &amp; Unlock</h3>
-              <p class="mt-2 text-amazla-secondary text-sm">Direct BLE commands — no internet required.</p>
-            </article>
-            <article class="bg-amazla-background rounded-2xl p-6" data-animate-stagger-item>
-              <h3 class="font-semibold text-amazla-dark">Frunk &amp; Trunk</h3>
-              <p class="mt-2 text-amazla-secondary text-sm">Open frunk or trunk over Bluetooth nearby.</p>
-            </article>
-            <article class="bg-amazla-background rounded-2xl p-6" data-animate-stagger-item>
-              <h3 class="font-semibold text-amazla-dark">BLE Pairing</h3>
-              <p class="mt-2 text-amazla-secondary text-sm">Pair once, keys stored on your watch.</p>
-            </article>
-            <article class="bg-amazla-background rounded-2xl p-6" data-animate-stagger-item>
-              <h3 class="font-semibold text-amazla-dark">$10 one-time</h3>
-              <p class="mt-2 text-amazla-secondary text-sm">Pay once in Zepp. No subscription.</p>
-            </article>
-          </div>
-        </div>
-
-        <div id="tesla-key" class="product-panel" role="tabpanel" hidden data-animate>
-          <div class="max-w-3xl mx-auto text-center sm:text-left">
-            <span class="inline-flex items-center rounded-full bg-amazla-accent/10 text-amazla-accent px-4 py-2 text-sm font-semibold tracking-wide uppercase">€11.49 one-time · BLE</span>
-            <h3 class="mt-6 text-2xl sm:text-3xl font-bold text-amazla-dark">Tesla Key</h3>
-            <p class="mt-4 text-lg text-amazla-secondary">
-              A Tesla key on your wrist. Lock, unlock, frunk, and trunk over Bluetooth (VCSEC) on Garmin watches — no internet needed for daily use.
-            </p>
-            <ul class="mt-6 space-y-2 text-amazla-secondary text-sm inline-block text-left">
-              <li class="flex items-start gap-2"><span class="w-2 h-2 rounded-full bg-amazla-accent mt-1.5 flex-shrink-0"></span> BLE range ~10–15 m, no phone relay for commands</li>
-              <li class="flex items-start gap-2"><span class="w-2 h-2 rounded-full bg-slate-400 mt-1.5 flex-shrink-0"></span> One-time pairing and Tesla sign-in at setup</li>
-              <li class="flex items-start gap-2"><span class="w-2 h-2 rounded-full bg-slate-400 mt-1.5 flex-shrink-0"></span> Garmin Connect IQ watches only</li>
-            </ul>
-          </div>
-          <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6" data-animate-stagger>
-            <article class="bg-amazla-background rounded-2xl p-6" data-animate-stagger-item>
-              <h3 class="font-semibold text-amazla-dark">Lock &amp; Unlock</h3>
-              <p class="mt-2 text-amazla-secondary text-sm">Direct BLE commands on your Garmin watch — no internet required.</p>
-            </article>
-            <article class="bg-amazla-background rounded-2xl p-6" data-animate-stagger-item>
-              <h3 class="font-semibold text-amazla-dark">Frunk &amp; Trunk</h3>
-              <p class="mt-2 text-amazla-secondary text-sm">Open frunk or trunk over Bluetooth nearby.</p>
-            </article>
-            <article class="bg-amazla-background rounded-2xl p-6" data-animate-stagger-item>
-              <h3 class="font-semibold text-amazla-dark">BLE Pairing</h3>
-              <p class="mt-2 text-amazla-secondary text-sm">Pair once, keys stored on your Garmin watch.</p>
-            </article>
-            <article class="bg-amazla-background rounded-2xl p-6" data-animate-stagger-item>
-              <h3 class="font-semibold text-amazla-dark">€11.49 one-time</h3>
-              <p class="mt-2 text-amazla-secondary text-sm">Pay once in Garmin Connect IQ. No subscription.</p>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Screenshots -->
-    <section class="relative py-20 lg:py-28 bg-amazla-background overflow-hidden" aria-label="App screenshots">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12" data-animate>
-          <h2 class="text-3xl sm:text-4xl font-bold text-amazla-dark">See it in action</h2>
-          <p class="mt-4 text-lg text-amazla-secondary">Screenshots from Amazla — the full-feature cloud app.</p>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-animate-stagger>
-          <div class="rounded-2xl overflow-hidden shadow-lg border border-slate-100 sm:col-span-2 lg:col-span-1 sm:max-w-[32rem] sm:mx-auto lg:max-w-none" data-animate-stagger-item>
-            <div class="rounded-2xl overflow-hidden w-full h-full" data-tilt>
-              <img src="/images/screenshots/status-overview.png" alt="Vehicle status screen" class="w-full h-auto block" width="927" height="934" />
-            </div>
-          </div>
-          <div class="rounded-2xl overflow-hidden shadow-lg border border-slate-100" data-animate-stagger-item>
-            <div class="rounded-2xl overflow-hidden w-full h-full" data-tilt>
-              <img src="/images/screenshots/lock-control.png" alt="Lock and unlock control screen" class="w-full h-auto block" width="926" height="734" />
-            </div>
-          </div>
-          <div class="rounded-2xl overflow-hidden shadow-lg border border-slate-100" data-animate-stagger-item>
-            <div class="rounded-2xl overflow-hidden w-full h-full" data-tilt>
-              <img src="/images/screenshots/climate-control.png" alt="Climate control screen (Amazla cloud)" class="w-full h-auto block" width="924" height="726" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Coming Soon -->
-    <section class="relative py-20 lg:py-28 bg-white overflow-hidden" id="coming-soon">
-      <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div class="absolute top-10 right-1/4 w-72 h-72 bg-amazla-primary/5 rounded-full blur-3xl" data-parallax="0.05"></div>
-      </div>
-      <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12" data-animate>
-          <p class="inline-flex items-center rounded-full bg-amazla-primary/10 text-amazla-primary px-4 py-2 text-sm font-semibold tracking-wide uppercase">Coming Soon</p>
-          <h2 class="mt-6 text-3xl sm:text-4xl font-bold text-amazla-dark">On the roadmap</h2>
-          <p class="mt-4 text-lg text-amazla-secondary">More ways to control your Tesla from your wrist.</p>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6" data-animate-stagger>
-          <article class="rounded-2xl bg-amazla-background p-6 sm:p-8" data-animate-stagger-item>
-            <span class="inline-flex items-center rounded-full bg-amazla-accent/10 text-amazla-accent px-3 py-1 text-xs font-semibold tracking-wide uppercase">Amazla</span>
-            <h3 class="mt-4 text-xl font-bold text-amazla-dark">Summon</h3>
-            <p class="mt-2 text-amazla-secondary text-sm leading-relaxed">Bring your car to you — or park it — without leaving the sidewalk.</p>
-          </article>
-          <article class="rounded-2xl bg-amazla-background p-6 sm:p-8" data-animate-stagger-item>
-            <span class="inline-flex items-center rounded-full bg-amazla-accent/10 text-amazla-accent px-3 py-1 text-xs font-semibold tracking-wide uppercase">Amazla</span>
-            <h3 class="mt-4 text-xl font-bold text-amazla-dark">Garage door</h3>
-            <p class="mt-2 text-amazla-secondary text-sm leading-relaxed">Open home as you arrive — one tap from your watch.</p>
-          </article>
-          <article class="rounded-2xl bg-amazla-background p-6 sm:p-8" data-animate-stagger-item>
-            <span class="inline-flex items-center rounded-full bg-amazla-primary/10 text-amazla-primary px-3 py-1 text-xs font-semibold tracking-wide uppercase">Both apps</span>
-            <h3 class="mt-4 text-xl font-bold text-amazla-dark">Find my car</h3>
-            <p class="mt-2 text-amazla-secondary text-sm leading-relaxed">Honk or flash the lights when you can’t spot it in a crowded lot.</p>
-          </article>
-          <article class="rounded-2xl bg-amazla-background p-6 sm:p-8" data-animate-stagger-item>
-            <span class="inline-flex items-center rounded-full bg-amazla-primary/10 text-amazla-primary px-3 py-1 text-xs font-semibold tracking-wide uppercase">Both apps</span>
-            <h3 class="mt-4 text-xl font-bold text-amazla-dark">Lights</h3>
-            <p class="mt-2 text-amazla-secondary text-sm leading-relaxed">Turn headlights on or off from your wrist when you need them.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Supported devices -->
-    <section class="relative py-20 lg:py-28 bg-amazla-dark text-white overflow-hidden" id="devices">
-      <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div class="absolute top-1/2 left-0 w-96 h-96 bg-amazla-primary/10 rounded-full blur-3xl -translate-x-1/2" data-parallax="0.06"></div>
-      </div>
-      <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-10" data-animate>
-          <h2 class="text-3xl sm:text-4xl font-bold">Supported watches</h2>
-          <p class="mt-4 text-lg text-slate-300">Each app targets a different platform.</p>
-        </div>
-        <div class="flex justify-center mb-14" role="tablist" aria-label="Device lists by app">
-          <div class="device-tabs">
-            <button type="button" id="device-tab-amazla" class="device-tab device-tab-active rounded-full text-sm font-semibold transition-colors" role="tab" aria-selected="true" aria-controls="device-panel-amazla">Amazla (ZeppOS 1.x)</button>
-            <button type="button" id="device-tab-key" class="device-tab rounded-full text-sm font-semibold text-slate-300 hover:text-white transition-colors" role="tab" aria-selected="false" aria-controls="device-panel-key">Amazla Key (ZeppOS 3+)</button>
-            <button type="button" id="device-tab-garmin-amazla" class="device-tab rounded-full text-sm font-semibold text-slate-300 hover:text-white transition-colors" role="tab" aria-selected="false" aria-controls="device-panel-garmin-amazla">Amazla (Garmin)</button>
-            <button type="button" id="device-tab-garmin" class="device-tab rounded-full text-sm font-semibold text-slate-300 hover:text-white transition-colors" role="tab" aria-selected="false" aria-controls="device-panel-garmin">Tesla Key (Garmin)</button>
-          </div>
-        </div>
-
-        <div id="device-panel-amazla" class="device-panel relative" role="tabpanel" data-animate>
-          <p class="text-center text-sm text-slate-400 mt-4 mb-8">GTR 3, GTS 3, GTR 4, GTS 4, T-Rex 2, Bip 5, Balance, and more — 23+ models.</p>
-          <div id="devices-carousel" class="devices-carousel overflow-x-auto" role="region" aria-label="Amazla supported devices">
-            <div class="flex items-stretch gap-4 sm:gap-5 w-max px-16 sm:px-20 pb-1">
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/gts-3.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">GTS 3</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/gtr-3.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">GTR 3</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/gtr-3-pro.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">GTR 3 Pro</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/gts-4-mini.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">GTS 4 mini</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/gtr-mini.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">GTR mini</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/band-7.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Band 7</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/falcon.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Falcon</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/t-rex-2.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">T-Rex 2</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/t-rex-ultra.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">T-Rex Ultra</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/gtr-4.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">GTR 4</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/gts-4.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">GTS 4</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/cheetah-pro.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Cheetah Pro</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/cheetah.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Cheetah</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/active.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Active</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/active-edge.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Active Edge</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/bip-5.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Bip 5</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/balance.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Balance</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/bip-5-unity.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Bip 5 Unity</p></article>
-            </div>
-          </div>
-          <button type="button" id="devices-prev-btn" class="devices-nav absolute -left-3 sm:-left-4 top-1/2 -translate-y-1/2 rounded-full bg-white/15 px-3 py-2 text-white hover:bg-white/25 transition-colors border-0" aria-label="Previous devices">←</button>
-          <button type="button" id="devices-next-btn" class="devices-nav absolute -right-3 sm:-right-4 top-1/2 -translate-y-1/2 rounded-full bg-white/15 px-3 py-2 text-white hover:bg-white/25 transition-colors border-0" aria-label="Next devices">→</button>
-        </div>
-
-        <div id="device-panel-key" class="device-panel relative" role="tabpanel" hidden data-animate>
-          <p class="text-center text-sm text-slate-400 mt-4 mb-8">Active 2, Balance 2, T-Rex 3, Bip 6, and all ZeppOS 3.0+ round, square, and band watches.</p>
-          <div id="devices-carousel-key" class="devices-carousel overflow-x-auto" role="region" aria-label="Amazla Key supported devices">
-            <div class="flex items-stretch gap-4 sm:gap-5 w-max px-16 sm:px-20 pb-1">
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/active-2.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Active 2</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/active-2-square.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Active 2 (Square)</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/balance-2.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Balance 2</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/bip-6.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Bip 6</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/t-rex-3.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">T-Rex 3</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/t-rex-ultra.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">T-Rex Ultra</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/gtr-4.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">GTR 4</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/gts-4.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">GTS 4</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/cheetah-pro.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Cheetah Pro</p></article>
-            </div>
-          </div>
-          <button type="button" id="devices-prev-btn-key" class="devices-nav absolute -left-3 sm:-left-4 top-1/2 -translate-y-1/2 rounded-full bg-white/15 px-3 py-2 text-white hover:bg-white/25 transition-colors border-0" aria-label="Previous devices">←</button>
-          <button type="button" id="devices-next-btn-key" class="devices-nav absolute -right-3 sm:-right-4 top-1/2 -translate-y-1/2 rounded-full bg-white/15 px-3 py-2 text-white hover:bg-white/25 transition-colors border-0" aria-label="Next devices">→</button>
-        </div>
-
-        <div id="device-panel-garmin-amazla" class="device-panel relative" role="tabpanel" hidden data-animate>
-          <p class="text-center text-sm text-slate-400 mt-4 mb-8">fēnix, epix, Enduro 2, Forerunner, Instinct, tactix, MARQ, Descent Mk3, Venu, vívoactive, D2 — 40+ models.</p>
-          <div id="devices-carousel-garmin-amazla" class="devices-carousel overflow-x-auto" role="region" aria-label="Amazla for Garmin supported devices">
-            <div class="flex items-stretch gap-4 sm:gap-5 w-max px-16 sm:px-20 pb-1">
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/fenix-7s.png?v=2" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">fēnix 7</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/fenix-8-pro.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">fēnix 8</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/epix-pro-47.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">epix / epix Pro</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/tactix-8.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">tactix 7 / 8</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/marq-gen2.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">MARQ Gen 2</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/forerunner-970.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Forerunner 970</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/forerunner-965.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Forerunner 965</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/forerunner-265.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Forerunner 265 / 570</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/instinct-3-amoled.png?v=2" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Instinct 3</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/descent-mk3.png?v=2" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Descent Mk3</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/venu-4-45.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Venu 4</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/venu-x1.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Venu X1</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/venu-sq2.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Venu Sq. 2</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/vivoactive-6.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">vívoactive 6</p></article>
-            </div>
-          </div>
-          <button type="button" id="devices-prev-btn-garmin-amazla" class="devices-nav absolute -left-3 sm:-left-4 top-1/2 -translate-y-1/2 rounded-full bg-white/15 px-3 py-2 text-white hover:bg-white/25 transition-colors border-0" aria-label="Previous devices">←</button>
-          <button type="button" id="devices-next-btn-garmin-amazla" class="devices-nav absolute -right-3 sm:-right-4 top-1/2 -translate-y-1/2 rounded-full bg-white/15 px-3 py-2 text-white hover:bg-white/25 transition-colors border-0" aria-label="Next devices">→</button>
-        </div>
-
-        <div id="device-panel-garmin" class="device-panel relative" role="tabpanel" hidden data-animate>
-          <p class="text-center text-sm text-slate-400 mt-4 mb-8">fēnix, epix, Enduro, Forerunner, Instinct, tactix, MARQ, Descent, Venu, vívoactive, Approach, D2 — 60+ models.</p>
-          <div id="devices-carousel-garmin" class="devices-carousel overflow-x-auto" role="region" aria-label="Tesla Key supported devices">
-            <div class="flex items-stretch gap-4 sm:gap-5 w-max px-16 sm:px-20 pb-1">
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/fenix-7s.png?v=2" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">fēnix 7</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/fenix-8-pro.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">fēnix 8</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/fenix-e.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">fēnix E</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/epix-pro-47.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">epix Pro</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/enduro-3.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Enduro 3</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/tactix-8.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">tactix 8</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/marq-gen2.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">MARQ Gen 2</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/forerunner-970.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Forerunner 970</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/forerunner-965.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Forerunner 965</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/forerunner-265.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Forerunner 265</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/forerunner-255.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Forerunner 255</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/instinct-3-amoled.png?v=2" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Instinct 3</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/instinct-crossover.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Instinct Crossover</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/descent-g2.png?v=2" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Descent G2</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/descent-mk3.png?v=2" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Descent Mk3</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/venu-4-45.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Venu 4</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/venu-x1.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Venu X1</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/venu-sq2.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Venu Sq. 2</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/vivoactive-6.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">vívoactive 6</p></article>
-              <article class="devices-card flex-shrink-0 w-[9.5rem] sm:w-44"><div class="devices-card-image flex items-center justify-center aspect-square p-3"><img src="/images/devices/garmin/approach-s70-42.png" alt="" class="max-h-full max-w-full object-contain" width="200" height="200" loading="lazy" decoding="async" aria-hidden="true" /></div><p class="mt-3 text-center text-xs sm:text-sm text-slate-200 font-medium leading-snug">Approach S70</p></article>
-            </div>
-          </div>
-          <button type="button" id="devices-prev-btn-garmin" class="devices-nav absolute -left-3 sm:-left-4 top-1/2 -translate-y-1/2 rounded-full bg-white/15 px-3 py-2 text-white hover:bg-white/25 transition-colors border-0" aria-label="Previous devices">←</button>
-          <button type="button" id="devices-next-btn-garmin" class="devices-nav absolute -right-3 sm:-right-4 top-1/2 -translate-y-1/2 rounded-full bg-white/15 px-3 py-2 text-white hover:bg-white/25 transition-colors border-0" aria-label="Next devices">→</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Download -->
-    <section class="relative py-20 lg:py-28 bg-amazla-background overflow-hidden" id="download">
-      <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div class="absolute top-1/2 left-1/2 w-[32rem] h-[32rem] bg-amazla-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" data-parallax="0.04"></div>
-      </div>
-      <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12" data-animate>
-          <h2 class="text-3xl sm:text-4xl font-bold text-amazla-dark">Get started</h2>
-        </div>
-        <div class="download-grid" data-animate-stagger>
-          <article class="rounded-3xl bg-white border border-slate-200 shadow-lg p-8 text-center" data-animate-stagger-item>
-            <span class="inline-flex items-center rounded-full bg-amazla-accent/10 text-amazla-accent px-4 py-1.5 text-sm font-semibold">Free</span>
-            <h3 class="mt-4 text-2xl font-bold text-amazla-dark">Amazla</h3>
-            <p class="mt-2 text-amazla-secondary text-sm">Full cloud control. Sign in with Tesla, deploy your key, and go.</p>
-            <div class="mt-6 flex flex-row flex-wrap gap-3 justify-center">
-              <a href="https://apps.apple.com/ua/app/zepp/id1127269366?l=uk" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center font-semibold text-base sm:text-lg text-amazla-dark bg-white border-2 border-slate-200 hover:border-amazla-accent rounded-xl px-8 py-4 transition-all">Install Zepp (iPhone)</a>
-              <a href="https://play.google.com/store/apps/details?id=com.huami.watch.hmwatchmanager&hl=uk" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center font-semibold text-base sm:text-lg text-amazla-dark bg-white border-2 border-slate-200 hover:border-amazla-accent rounded-xl px-8 py-4 transition-all">Install Zepp (Android)</a>
-            </div>
-            <p class="mt-4 text-sm text-amazla-secondary">Install Zepp on your phone first, then find the app inside Zepp.</p>
-            <div class="mt-6" style="border-top:1px solid #e2e8f0;padding-top:1.5rem">
-              <p class="text-sm font-semibold text-amazla-dark">On a Garmin watch?</p>
-              <a href="https://apps.garmin.com/apps/0b68560b-0407-45db-9edc-1cc1246215da" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center justify-center font-semibold text-base sm:text-lg text-white bg-amazla-dark hover:bg-slate-700 rounded-xl px-8 py-4 transition-all shadow-lg">Install on Garmin</a>
-              <p class="mt-3 text-sm text-amazla-secondary">Find it in the Garmin Connect IQ Store.</p>
-            </div>
-          </article>
-          <article class="rounded-3xl bg-white border-2 border-amazla-primary/20 shadow-lg p-8 text-center" data-animate-stagger-item>
-            <span class="inline-flex items-center rounded-full bg-amazla-primary/10 text-amazla-primary px-4 py-1.5 text-sm font-semibold">$10 one-time</span>
-            <p class="mt-2 text-xs text-amazla-secondary">No subscription</p>
-            <h3 class="mt-4 text-2xl font-bold text-amazla-dark">Amazla Key</h3>
-            <p class="mt-2 text-amazla-secondary text-sm">BLE Tesla key. Pair once, then control your car without your phone.</p>
-            <div class="mt-6 flex flex-row flex-wrap gap-3 justify-center">
-              <a href="https://apps.apple.com/ua/app/zepp/id1127269366?l=uk" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center font-semibold text-base sm:text-lg text-white bg-amazla-primary hover:bg-red-600 rounded-xl px-8 py-4 transition-all shadow-lg shadow-red-500/25">Install Zepp (iPhone)</a>
-              <a href="https://play.google.com/store/apps/details?id=com.huami.watch.hmwatchmanager&hl=uk" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center font-semibold text-base sm:text-lg text-white bg-amazla-primary hover:bg-red-600 rounded-xl px-8 py-4 transition-all shadow-lg shadow-red-500/25">Install Zepp (Android)</a>
-            </div>
-            <p class="mt-4 text-sm text-amazla-secondary">Install Zepp on your phone first, then find the app inside Zepp.</p>
-          </article>
-          <article class="rounded-3xl bg-white border-2 border-slate-300 shadow-lg p-8 text-center sm:col-span-2 lg:col-span-1" data-animate-stagger-item>
-            <span class="inline-flex items-center rounded-full bg-slate-100 text-slate-700 px-4 py-1.5 text-sm font-semibold">€11.49 one-time</span>
-            <p class="mt-2 text-xs text-amazla-secondary">No subscription</p>
-            <h3 class="mt-4 text-2xl font-bold text-amazla-dark">Tesla Key</h3>
-            <p class="mt-2 text-amazla-secondary text-sm">BLE Tesla key for Garmin watches. Lock, unlock, frunk and trunk — no phone needed daily.</p>
-            <div class="mt-6 flex flex-row flex-wrap gap-3 justify-center">
-              <a href="https://apps.garmin.com/apps/4571dbca-7c1e-4d04-9636-82ddb54283a6" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center font-semibold text-base sm:text-lg text-white bg-amazla-dark hover:bg-slate-700 rounded-xl px-8 py-4 transition-all shadow-lg">Install on Garmin</a>
-            </div>
-            <p class="mt-4 text-sm text-amazla-secondary">Find it on Garmin Connect IQ Store.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="bg-amazla-dark text-slate-400 py-12">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <span class="font-semibold text-white">Amazla</span>
-      <div class="flex gap-8 text-sm">
-        <a href="/privacy-and-terms.html#privacy" class="hover:text-white transition-colors">Privacy</a>
-        <a href="/privacy-and-terms.html#terms" class="hover:text-white transition-colors">Terms</a>
-        <a href="/how-it-works.html" class="hover:text-white transition-colors">How it works</a>
+      <div class="stage" aria-hidden="true">
+        <div class="watch w1 glow-red swap"><div class="face">
+          <img src="/images/app/key-closed.webp" alt="" width="360" height="360" fetchpriority="high">
+          <img src="/images/app/key-open.webp" alt="" width="360" height="360">
+        </div></div>
+        <div class="watch w2 glow-lime"><div class="face">
+          <img src="/images/app/amazla-status.webp" alt="" width="360" height="360">
+        </div></div>
+        <div class="chip c1"><i></i>Authorized</div>
+        <div class="chip c2">62% · 173 mi</div>
       </div>
     </div>
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-8 border-t border-white/10 text-center text-sm text-slate-500">
-      © Amazla. Amazla is free on Amazfit and Garmin; Amazla Key is a $10 one-time purchase inside Zepp; Tesla Key is a €11.49 one-time purchase inside Garmin Connect IQ. Not affiliated with Tesla, Zepp, or Garmin.
+  </section>
+
+  <section class="sec" aria-labelledby="pick-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">Two apps</p>
+        <h2 class="h2" id="pick-h">A key, and a dashboard.</h2>
+        <p class="lead">They do different jobs, so many people run both. Amazla Key works next to the car with no internet. Amazla works over the internet from across town.</p>
+      </div>
+      <div class="pick">
+        <article class="app-card key">
+          <span class="tag">Bluetooth key</span>
+          <h3>Amazla Key</h3>
+          <p>Your watch enrolls in the car as a key, just like the Tesla app on your phone.</p>
+          <ul class="ticks">
+            <li>Walk up and the car unlocks</li>
+            <li>Lock, unlock, frunk and trunk</li>
+            <li>No phone and no internet at the car</li>
+            <li>Watch face shortcut and widgets</li>
+          </ul>
+          <p class="price"><b>$9.99</b><span>once · up to 3 watches</span></p>
+          <a class="btn btn-red" href="#key">Explore Amazla Key</a>
+        </article>
+        <article class="app-card amz">
+          <span class="tag">Internet dashboard</span>
+          <h3>Amazla</h3>
+          <p>Battery, range and what the car is doing, with controls a tap away, wherever you are.</p>
+          <ul class="ticks">
+            <li>Battery, range and charging time</li>
+            <li>Climate, seat and wheel heaters</li>
+            <li>Charge port and charging</li>
+            <li>Tesla, Control and Climate widgets</li>
+          </ul>
+          <p class="price"><b>Free</b><span>plans from $4.99/mo</span></p>
+          <a class="btn btn-lime" href="#amazla">Explore Amazla</a>
+        </article>
+      </div>
     </div>
-  </footer>
+  </section>
 
-  <script>
-    (function () {
-      var tabAmazla = document.getElementById('device-tab-amazla');
-      var tabKey = document.getElementById('device-tab-key');
-      var tabGarmin = document.getElementById('device-tab-garmin');
-      var tabGarminAmazla = document.getElementById('device-tab-garmin-amazla');
-      var panelAmazla = document.getElementById('device-panel-amazla');
-      var panelKey = document.getElementById('device-panel-key');
-      var panelGarmin = document.getElementById('device-panel-garmin');
-      var panelGarminAmazla = document.getElementById('device-panel-garmin-amazla');
+  <section class="sec k" id="key" aria-labelledby="key-h">
+    <div class="wrap split">
+      <figure class="art">
+        <div class="watch glow-red swap"><div class="face">
+          <img src="/images/app/key-closed.webp" alt="Amazla Key on a round watch: a green Model Y, status Authorized" width="360" height="360" loading="lazy">
+          <img src="/images/app/key-open.webp" alt="" width="360" height="360" loading="lazy">
+        </div></div>
+        <figcaption>Frunk and trunk open, drawn open on the watch.</figcaption>
+      </figure>
+      <div>
+        <p class="kicker">Amazla Key</p>
+        <h2 class="h2" id="key-h">Your watch <span class="red">is</span> the key.</h2>
+        <p class="lead" style="margin-top:20px">It pairs with your Tesla as a real Bluetooth phone key and signs every command with its own private key, which never leaves the watch.</p>
+        <div class="feats">
+          <div class="feat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13" cy="4" r="2"/><path d="M9 21l2-5 3 2v4M7 12l3-3 4 1 3 3M10 9l-2 6"/></svg></div><h3>Walk up, it opens</h3><p>Keep the app open as you walk up. The status turns green “Authorized” and the handle just works.</p></div>
+          <div class="feat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0"/></svg></div><h3>Lock, frunk, trunk</h3><p>One tap each, or map one to the watch button. Open lids show as open on screen.</p></div>
+          <div class="feat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8.5a15 15 0 0 1 20 0M5 12a10 10 0 0 1 14 0M8.5 15.5a5 5 0 0 1 7 0"/><circle cx="12" cy="19" r="1"/></svg></div><h3>Works with no signal</h3><p>Underground garage, airplane mode, no data plan. Bluetooth is all it needs.</p></div>
+          <div class="feat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l2.5 2.5"/></svg></div><h3>From the watch face</h3><p>Shortcut card, key-card widget, and the free TeslaFace watch face with a one-tap key launcher.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      function showDevicePanel(which) {
-        var tabs = [tabAmazla, tabKey, tabGarminAmazla, tabGarmin];
-        var panels = [panelAmazla, panelKey, panelGarminAmazla, panelGarmin];
-        var keys = ['amazla', 'key', 'garmin-amazla', 'garmin'];
-        tabs.forEach(function (tab, i) {
-          var active = keys[i] === which;
-          panels[i].hidden = !active;
-          tab.classList.toggle('device-tab-active', active);
-          tab.setAttribute('aria-selected', active ? 'true' : 'false');
-          tab.classList.toggle('text-slate-300', !active);
-        });
-      }
+  <section class="sec" aria-labelledby="howto-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">Set it up once</p>
+        <h2 class="h2" id="howto-h">Two presses to the trunk.</h2>
+      </div>
+      <div class="howto">
+        <div class="box">
+          <h3>Pair at the car</h3>
+          <p>A couple of minutes, once.</p>
+          <ol class="steps">
+            <li><div><b>Install from Zepp</b><span>Get Amazla Key in the Zepp app and buy it on your phone. One payment covers up to 3 watches.</span></div></li>
+            <li><div><b>Enter your car</b><span>Type the VIN in the app’s settings on your phone. Copy it from the Tesla app to be safe.</span></div></li>
+            <li><div><b>Tap your key card</b><span>Tap “Pair” on the watch, tap your key card on the console, then confirm the new key on the car’s screen.</span></div></li>
+          </ol>
+        </div>
+        <div class="box">
+          <h3>Make it a fob</h3>
+          <p>Open the trunk without touching the screen.</p>
+          <ol class="steps">
+            <li><div><b>Map a watch button</b><span>On the watch, open Settings → Preferences → Press Button and pick Amazla Key.</span></div></li>
+            <li><div><b>Pick the action</b><span>In the app’s settings, set Watch Button Action to Trunk, Frunk or Lock/Unlock.</span></div></li>
+            <li><div><b>Press, press</b><span>The first press opens the app, the second opens the trunk.</span></div></li>
+          </ol>
+          <p class="note"><b>Faster still:</b> turn on Remote Only (No Walk-Up). The watch skips the walk-up handshake, which takes 4 to 8 seconds off every connection. Door handles then no longer open the car by themselves.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      tabAmazla.addEventListener('click', function () { showDevicePanel('amazla'); });
-      tabKey.addEventListener('click', function () { showDevicePanel('key'); });
-      tabGarminAmazla.addEventListener('click', function () { showDevicePanel('garmin-amazla'); });
-      tabGarmin.addEventListener('click', function () { showDevicePanel('garmin'); });
+  <section class="sec z" id="amazla" aria-labelledby="amz-h">
+    <div class="wrap">
+      <div class="split rev">
+        <figure class="art">
+          <div class="watch glow-lime"><div class="face">
+            <img src="/images/app/amazla-status.webp" alt="Amazla on a round watch: Model Y at 62 percent and 173 miles, parked" width="360" height="360" loading="lazy">
+          </div></div>
+        </figure>
+        <div>
+          <p class="kicker">Amazla</p>
+          <h2 class="h2" id="amz-h">Your Tesla, <span class="lime">at a glance.</span></h2>
+          <p class="lead" style="margin-top:20px">Your model in its colour, battery and range, and what it’s doing: parked, charging with the time left, asleep or offline. Controls are one swipe away, over the internet.</p>
+          <div class="feats">
+            <div class="feat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5.5 6.5l13 11M18.5 6.5l-13 11M3 12h18"/></svg></div><h3>Climate</h3><p>Climate on or off, defrost, seat heaters front and rear, heated steering wheel.</p></div>
+            <div class="feat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div><h3>Charging</h3><p>Open or close the charge port, start charging, see the time left.</p></div>
+            <div class="feat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg></div><h3>Widgets</h3><p>Tesla, Control and Climate cards. Check or act without opening the app.</p></div>
+            <div class="feat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/></svg></div><h3>Tesla’s own sign-in</h3><p>You sign in on Tesla’s page. We never see your password.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="gallery">
+        <figure><div class="watch"><div class="face"><img src="/images/app/amazla-status.webp" alt="Amazla status: battery, range and the car in its colour" width="360" height="360" loading="lazy"></div></div><figcaption><b>Status</b>Battery, range, odometer</figcaption></figure>
+        <figure><div class="watch"><div class="face"><img src="/images/app/amazla-control.webp" alt="Amazla control: the car from above with frunk, trunk and lock" width="360" height="360" loading="lazy"></div></div><figcaption><b>Control</b>Lock, frunk, trunk</figcaption></figure>
+        <figure><div class="watch"><div class="face"><img src="/images/app/amazla-climate.webp" alt="Amazla climate: cabin temperature, seat heaters and defrost" width="360" height="360" loading="lazy"></div></div><figcaption><b>Climate</b>Heat, defrost, seats</figcaption></figure>
+      </div>
+      <div class="plans">
+        <div class="plan"><h3>Free</h3><p class="price"><b>$0</b></p><ul class="ticks"><li>10 status checks a day</li><li>5 commands a day</li><li>1 wake a day</li><li>Every feature</li></ul></div>
+        <div class="plan"><h3>Plus</h3><p class="price"><b>$4.99</b><span>/ month</span></p><ul class="ticks"><li>40 status checks a day</li><li>20 commands a day</li><li>3 wakes a day</li><li>Or $39.99 a year</li></ul></div>
+        <div class="plan best"><h3>Unlimited</h3><p class="price"><b>$9.99</b><span>/ month</span></p><ul class="ticks"><li>No daily counters</li><li>Every car on your account</li><li>Wakes the car when you open it</li><li>Or $79.99 a year</li></ul></div>
+      </div>
+      <p class="small" style="margin-top:16px">Why plans: Tesla bills every request an app makes, wakes most of all. Every plan has every feature; only the daily allowance changes.</p>
+    </div>
+  </section>
 
-      var productTabAmazla = document.getElementById('product-tab-amazla');
-      var productTabKey = document.getElementById('product-tab-key');
-      var productTabTesla = document.getElementById('product-tab-tesla');
-      var productPanelAmazla = document.getElementById('amazla');
-      var productPanelKey = document.getElementById('amazla-key');
-      var productPanelTesla = document.getElementById('tesla-key');
+  <section class="sec" aria-labelledby="cmp-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">Side by side</p>
+        <h2 class="h2" id="cmp-h">Which one do I need?</h2>
+      </div>
+      <div class="table" role="region" aria-labelledby="cmp-h" tabindex="0">
+        <table>
+          <thead><tr><th scope="col">Feature</th><th scope="col">Amazla Key</th><th scope="col">Amazla</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Connects</th><td>Bluetooth, straight to the car</td><td>Internet, through Tesla</td></tr>
+            <tr><th scope="row">Works from</th><td>Next to the car, about 10 m</td><td>Anywhere</td></tr>
+            <tr><th scope="row">Phone needed</th><td>Only for setup</td><td>Yes, for internet</td></tr>
+            <tr><th scope="row">Walk-up unlock</th><td>Yes</td><td>No</td></tr>
+            <tr><th scope="row">Lock, frunk, trunk</th><td>Yes</td><td>Yes</td></tr>
+            <tr><th scope="row">Climate and charging</th><td>No</td><td>Yes</td></tr>
+            <tr><th scope="row">Battery and range</th><td>No</td><td>Yes</td></tr>
+            <tr><th scope="row">Price</th><td>$9.99 once</td><td>Free, plans from $4.99/mo</td></tr>
+            <tr><th scope="row">On Garmin as</th><td>Tesla Key</td><td>Amazla(Tesla)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
 
-      function showProductPanel(which) {
-        var isAmazla = which === 'amazla';
-        var isKey = which === 'key';
-        var isTesla = which === 'tesla';
+  <section class="sec" id="garmin" aria-labelledby="gar-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">Garmin</p>
+        <h2 class="h2" id="gar-h">Same apps, on Garmin.</h2>
+        <p class="lead">Both apps are on the Connect IQ store, with the same screens and the same look. Fenix, Forerunner, Venu, epix, Instinct and more.</p>
+      </div>
+      <div class="garmin">
+        <article class="gcard k">
+          <img src="/images/app/garmin-key.webp" alt="Tesla Key on a Garmin fenix: white Model Y, frunk and trunk open, Connected" width="480" height="637" loading="lazy">
+          <div>
+            <span class="as">Amazla Key on Garmin</span>
+            <h3>Tesla Key</h3>
+            <p>The Bluetooth key: lock, unlock, frunk and trunk, right next to the car, no phone needed.</p>
+            <a class="btn btn-red btn-sm" href="https://apps.garmin.com/apps/4571dbca-7c1e-4d04-9636-82ddb54283a6">Get Tesla Key</a>
+          </div>
+        </article>
+        <article class="gcard z">
+          <img class="round" src="/images/app/garmin-amazla.webp" alt="Amazla(Tesla) on a Garmin watch: Model Y at 72 percent and 214 miles, parked" width="454" height="454" loading="lazy">
+          <div>
+            <span class="as">Amazla on Garmin</span>
+            <h3>Amazla(Tesla)</h3>
+            <p>The dashboard: battery, range, climate and charging, from anywhere over the internet.</p>
+            <a class="btn btn-lime btn-sm" href="https://apps.garmin.com/apps/0b68560b-0407-45db-9edc-1cc1246215da">Get Amazla(Tesla)</a>
+          </div>
+        </article>
+      </div>
+      <p class="small" style="margin-top:16px">Prefer a watch face? <a href="https://apps.garmin.com/apps/b8ffff66-6f6f-47bb-966a-c46ec07510e0">TeslaKey-Link</a> shows the time and heart rate and opens Tesla Key with a long press.</p>
+    </div>
+  </section>
 
-        productPanelAmazla.hidden = !isAmazla;
-        productPanelKey.hidden = !isKey;
-        productPanelTesla.hidden = !isTesla;
+  <section class="sec" id="watches" aria-labelledby="dev-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">Supported watches</p>
+        <h2 class="h2" id="dev-h">Made for your watch.</h2>
+        <p class="lead">Both apps are on the Zepp store for Amazfit and on Connect IQ for Garmin.</p>
+      </div>
+      <p class="os">Amazfit</p>
+      <div class="devs">
+        <div class="box">
+          <h3>Amazla Key</h3>
+          <p class="small">Zepp OS 3 and newer</p>
+          <ul class="chips">
+            <li>Active</li><li>Active Edge</li><li>Active Max</li><li>Active 2</li><li>Active 2 Square</li><li>Active 3 Premium</li><li>Balance</li><li>Balance 2</li><li>Balance 3</li><li>Balance Ultra</li><li>Bip 5 Unity</li><li>Bip 6</li><li>Bip Max</li><li>Cheetah</li><li>Cheetah Pro</li><li>Cheetah Square</li><li>Cheetah 2 Pro</li><li>Cheetah 2 Ultra</li><li>Falcon</li><li>GTR 4</li><li>GTS 4</li><li>T-Rex 3</li><li>T-Rex 3 Pro</li><li>T-Rex Ultra</li><li>T-Rex Ultra 2</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>Amazla</h3>
+          <p class="small">Every Amazla Key watch, plus older models</p>
+          <ul class="chips">
+            <li class="plus">Band 7</li><li class="plus">Bip 5</li><li class="plus">GTR 3</li><li class="plus">GTR 3 Pro</li><li class="plus">GTR mini</li><li class="plus">GTS 3</li><li class="plus">GTS 4 mini</li><li class="plus">T-Rex 2</li><li>and every Amazla Key watch</li>
+          </ul>
+        </div>
+      </div>
+      <p class="os" style="margin-top:36px">Garmin</p>
+      <div class="devs">
+        <div class="box">
+          <h3>Tesla Key</h3>
+          <p class="small">Every Amazla(Tesla) watch, plus</p>
+          <ul class="chips">
+            <li>Approach S70</li><li>D2 Mach 2</li><li>D2 Mach 2 Pro</li><li>Descent G2</li><li>Enduro 3</li><li>fēnix 8 Pro</li><li>fēnix 9</li><li>fēnix 9 Pro</li><li>fēnix E</li><li>Forerunner 255</li><li>Forerunner 955</li><li>Instinct 3 Solar</li><li>Instinct Crossover AMOLED</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>Amazla(Tesla)</h3>
+          <p class="small">All of these also run Tesla Key</p>
+          <ul class="chips">
+            <li>D2 Air X10</li><li>D2 Mach 1</li><li>Descent Mk3</li><li>epix (Gen 2)</li><li>epix Pro</li><li>fēnix 7</li><li>fēnix 7S</li><li>fēnix 7X</li><li>fēnix 7 Pro</li><li>fēnix 8</li><li>fēnix 8 Solar</li><li>Forerunner 265</li><li>Forerunner 570</li><li>Forerunner 965</li><li>Forerunner 970</li><li>Instinct 3 AMOLED</li><li>MARQ (Gen 2)</li><li>Venu 4</li><li>Venu Sq 2</li><li>Venu X1</li><li>vívoactive 6</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        productTabAmazla.classList.toggle('product-tab-active', isAmazla);
-        productTabKey.classList.toggle('product-tab-active', isKey);
-        productTabTesla.classList.toggle('product-tab-active', isTesla);
+  <section class="sec" id="faq" aria-labelledby="faq-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">FAQ</p>
+        <h2 class="h2" id="faq-h">Good questions.</h2>
+      </div>
+      <div class="faq">
+        <details><summary>Which Teslas work?</summary><p>Amazla Key works with any Tesla that supports a phone key over Bluetooth: Model 3, Model Y, Cybertruck, and Model S and Model X from 2021. Amazla works with any Tesla on your Tesla account.</p></details>
+        <details><summary>Do I need my phone with me?</summary><p>Not for Amazla Key. After pairing, the watch talks to the car on its own over Bluetooth. Amazla goes through the internet, so it uses your phone’s connection.</p></details>
+        <details><summary>Does Amazla Key work in the background?</summary><p>No. The app has to be open on the watch screen, because the watch does not allow Bluetooth from background apps. Map it to a watch button and it’s one press away.</p></details>
+        <details><summary>Is it safe?</summary><p>Amazla Key uses Tesla’s own phone-key protocol. Every command is signed on the watch with a key that never leaves it, and the car checks each one. Amazla signs in on Tesla’s own page and never sees your password.</p></details>
+        <details><summary>Will Amazla wake my car and drain the battery?</summary><p>Only when you tap. On Free and Plus the app never wakes the car on its own.</p></details>
+        <details><summary>Is there a free trial of Amazla Key?</summary><p>No. If it doesn’t work with your car, ask for a refund within 14 days and you get your money back.</p></details>
+        <details><summary>Is it on Garmin?</summary><p>Yes. Amazla Key is Tesla Key on the Garmin store, Amazla is Amazla(Tesla), and the watch face is TeslaKey-Link.</p></details>
+        <details><summary>Something isn’t working. Who do I ask?</summary><p>Open the app’s settings in the Zepp app and tap “Email us”, or write to <a href="mailto:contact@amazla.app">contact@amazla.app</a>.</p></details>
+      </div>
+    </div>
+  </section>
 
-        productTabAmazla.setAttribute('aria-selected', isAmazla ? 'true' : 'false');
-        productTabKey.setAttribute('aria-selected', isKey ? 'true' : 'false');
-        productTabTesla.setAttribute('aria-selected', isTesla ? 'true' : 'false');
+  <section class="final" id="get" aria-labelledby="get-h">
+    <div class="wrap">
+      <p class="kicker">Get started</p>
+      <h2 id="get-h">Leave the phone.</h2>
+      <p class="lead">Amazfit: install the Zepp app on your phone first, then open the app page. Garmin: get it from the Connect IQ store.</p>
+      <div class="stores">
+        <div class="store">
+          <h3>Amazla Key</h3>
+          <div class="ctas">
+            <a class="btn btn-red btn-sm" href="amazfit://com.huami.watch.hmwatchmanager/action?name=appStore&amp;target=detail&amp;data=%7B%22id%22%3A%22169812%22%7D">Open in Zepp</a>
+            <a class="btn btn-ghost btn-sm" href="https://apps.garmin.com/apps/4571dbca-7c1e-4d04-9636-82ddb54283a6">Tesla Key on Garmin</a>
+          </div>
+        </div>
+        <div class="store">
+          <h3>Amazla</h3>
+          <div class="ctas">
+            <a class="btn btn-lime btn-sm" href="amazfit://com.huami.watch.hmwatchmanager/action?name=appStore&amp;target=detail&amp;data=%7B%22id%22%3A%22125232%22%7D">Open in Zepp</a>
+            <a class="btn btn-ghost btn-sm" href="https://apps.garmin.com/apps/0b68560b-0407-45db-9edc-1cc1246215da">Amazla(Tesla) on Garmin</a>
+          </div>
+        </div>
+      </div>
+      <p class="small">No Zepp yet? <a href="https://apps.apple.com/app/zepp/id1127269366">Zepp for iPhone</a> · <a href="https://play.google.com/store/apps/details?id=com.huami.watch.hmwatchmanager">Zepp for Android</a><br>Watch face: <a href="amazfit://com.huami.watch.hmwatchmanager/action?name=appStore&amp;target=detail&amp;data=%7B%22id%22%3A%22172958%22%7D">TeslaFace in Zepp</a> · <a href="https://apps.garmin.com/apps/b8ffff66-6f6f-47bb-966a-c46ec07510e0">TeslaKey-Link for Garmin</a></p>
+    </div>
+  </section>
+</main>
 
-        productTabAmazla.classList.toggle('text-slate-500', !isAmazla);
-        productTabKey.classList.toggle('text-slate-500', !isKey);
-        productTabTesla.classList.toggle('text-slate-500', !isTesla);
-      }
-
-      productTabAmazla.addEventListener('click', function () { showProductPanel('amazla'); });
-      productTabKey.addEventListener('click', function () { showProductPanel('key'); });
-      productTabTesla.addEventListener('click', function () { showProductPanel('tesla'); });
-
-      function syncProductFromHash() {
-        var hash = (location.hash || '').toLowerCase();
-        if (hash === '#amazla-key') {
-          showProductPanel('key');
-          document.getElementById('products').scrollIntoView();
-        } else if (hash === '#amazla') {
-          showProductPanel('amazla');
-          document.getElementById('products').scrollIntoView();
-        } else if (hash === '#tesla-key') {
-          showProductPanel('tesla');
-          document.getElementById('products').scrollIntoView();
-        } else if (hash === '#products') {
-          showProductPanel('amazla');
-        }
-      }
-      syncProductFromHash();
-      window.addEventListener('hashchange', syncProductFromHash);
-
-      function initCarousel(carouselId, prevId, nextId) {
-        var carousel = document.getElementById(carouselId);
-        var prev = document.getElementById(prevId);
-        var next = document.getElementById(nextId);
-        if (!carousel || !prev || !next) return;
-        var track = carousel.firstElementChild;
-        if (!track) return;
-        var isGarmin = carouselId.indexOf('devices-carousel-garmin') === 0;
-        var maxScale = isGarmin ? 1.0 : 1.12;
-        var scaleDrop = isGarmin ? 0.0 : 0.2;
-
-        function updateScale() {
-          var cards = track.querySelectorAll('.devices-card');
-          var center = carousel.getBoundingClientRect().left + carousel.clientWidth / 2;
-          var half = Math.max(carousel.clientWidth * 0.5, 1);
-          cards.forEach(function (card) {
-            var img = card.querySelector('.devices-card-image');
-            var rect = card.getBoundingClientRect();
-            var dist = Math.abs(center - (rect.left + rect.width / 2));
-            var t = Math.min(dist / half, 1);
-            if (img) {
-              if (isGarmin) {
-                img.style.transform = 'none';
-              } else {
-                img.style.transform = 'scale(' + (maxScale - t * scaleDrop).toFixed(3) + ')';
-              }
-            }
-            card.style.opacity = (1 - t * 0.25).toFixed(3);
-            card.style.zIndex = String(Math.round((1 - t) * 100));
-          });
-        }
-
-        var ticking = false;
-        carousel.addEventListener('scroll', function () {
-          if (!ticking) {
-            requestAnimationFrame(function () { updateScale(); ticking = false; });
-            ticking = true;
-          }
-        }, { passive: true });
-        window.addEventListener('resize', updateScale);
-        var step = function () { return Math.max(carousel.clientWidth * 0.42, 240); };
-        prev.addEventListener('click', function () {
-          if (carousel.scrollLeft <= 8) carousel.scrollLeft = carousel.scrollWidth - carousel.clientWidth - 8;
-          carousel.scrollBy({ left: -step(), behavior: 'smooth' });
-        });
-        next.addEventListener('click', function () {
-          if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 8) carousel.scrollLeft = 8;
-          carousel.scrollBy({ left: step(), behavior: 'smooth' });
-        });
-        updateScale();
-      }
-
-      initCarousel('devices-carousel', 'devices-prev-btn', 'devices-next-btn');
-      initCarousel('devices-carousel-key', 'devices-prev-btn-key', 'devices-next-btn-key');
-      initCarousel('devices-carousel-garmin-amazla', 'devices-prev-btn-garmin-amazla', 'devices-next-btn-garmin-amazla');
-      initCarousel('devices-carousel-garmin', 'devices-prev-btn-garmin', 'devices-next-btn-garmin');
-
-    })();
-  </script>
+<footer>
+  <div class="wrap">
+    <p>© Amazla. Not affiliated with Tesla, Zepp Health or Garmin.</p>
+    <nav aria-label="Footer">
+      <a href="/how-it-works.html">How it works</a>
+      <a href="/privacy-and-terms.html">Privacy and terms</a>
+      <a href="https://watch.ab.team">More watch apps</a>
+      <a href="mailto:contact@amazla.app">contact@amazla.app</a>
+    </nav>
+  </div>
+</footer>
 </body>
 </html>
